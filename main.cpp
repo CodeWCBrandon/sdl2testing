@@ -3,17 +3,23 @@
 #include <string>
 #include <stdlib.h>
 
-bool Update();
-void Start();
 bool Init();
+void Start();
+bool Update();
+void PlayerMovement(std::string& processes);
+void RenderRectWithColor(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a);
 int Exit(int exitCode);
 std::string Input();
 
 
+// ========= RENDERING ==========
 SDL_Window* window;
 SDL_Renderer* renderer;
-SDL_Rect windowLayout;
 SDL_Texture* background = nullptr;
+SDL_Rect windowLayout;
+
+// ========= VARIABLES ==========
+SDL_Rect player = {50, 50, 100, 100};
 
 // all technical setup
 int main() 
@@ -51,12 +57,29 @@ bool Update()
 {
     SDL_RenderCopy(renderer, background, NULL, &windowLayout); // render image
 
+    RenderRectWithColor(renderer, player, 0, 255, 255, 255);
+
     //get input
     std::string processes = Input();
+    PlayerMovement(processes);
 
     //processes
     if(processes == "exit") return false;
     return true; // keep looping
+}
+
+void PlayerMovement(std::string& processes)
+{
+    if(processes == "w") player.y -= 5;
+    else if(processes == "a") player.x -= 5;
+    else if(processes == "s") player.y += 5;
+    else if(processes == "d") player.x += 5;
+}
+
+void RenderRectWithColor(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a)
+{
+    SDL_SetRenderDrawColor(renderer, r, g, b, a); // change renderer color
+    SDL_RenderFillRect(renderer, &player); // render
 }
 
 std::string Input()
@@ -78,8 +101,13 @@ std::string Input()
                 {
                     //on click w
                     case SDLK_w:
-                        std::cout << "Clicked W\n";
-                        break;
+                        return "w";
+                    case SDLK_s:
+                        return "s";
+                    case SDLK_a:
+                        return "a";
+                    case SDLK_d:
+                        return "d";
                 }
                 break;
 
@@ -89,7 +117,7 @@ std::string Input()
                 {
                     case SDL_BUTTON_LEFT:
                         std::cout << "Clicked left mouse\n";
-                        break;
+                        return "left-mouse";
                 }
                 break;
         }
@@ -133,6 +161,7 @@ bool Init()
 int Exit(int exitCode)
 {
     //Quitting
+    SDL_DestroyTexture(background);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
