@@ -25,7 +25,7 @@ int main()
     while(true)
     {
         Update();
-
+        SDL_Delay(5000);
         //updating window
         SDL_UpdateWindowSurface(window);    
     }
@@ -47,6 +47,7 @@ void Update()
     if(!temp1) std::cout << "Loading img error\n" << SDL_GetError() << std::endl;
 
     SDL_Surface* img1 = SDL_ConvertSurface(temp1, winSurface->format, 0);
+    SDL_FreeSurface(temp1);
 }
     
 bool Init()
@@ -70,6 +71,8 @@ bool Init()
 
     //Creating the window surface
     winSurface = SDL_GetWindowSurface(window);
+
+    return true;
 }
 
 int Exit(int exitCode)
