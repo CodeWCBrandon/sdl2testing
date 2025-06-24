@@ -10,6 +10,7 @@ int Exit(int exitCode);
 
 SDL_Window* window;
 SDL_Surface* winSurface;
+SDL_Surface* background = nullptr;
 
 // all technical setup
 int main() 
@@ -25,9 +26,10 @@ int main()
     while(true)
     {
         Update();
-        SDL_Delay(5000);
+
         //updating window
         SDL_UpdateWindowSurface(window);    
+        SDL_Delay(5000);
     }
     
     return Exit(0);
@@ -36,18 +38,16 @@ int main()
 //Game logic
 void Start()
 {
-
+    //adding backgrounds
+    SDL_Surface* tempBG = SDL_LoadBMP("bg.bmp");
+    background = SDL_ConvertSurface(tempBG, winSurface->format, 0);
+    SDL_FreeSurface(tempBG); // flushing temp Background
 }
 
 //Updating every frames
 void Update()
 {
-    // Window background rectangle with colors
-    SDL_Surface* temp1 = SDL_LoadBMP("testing.gif");
-    if(!temp1) std::cout << "Loading img error\n" << SDL_GetError() << std::endl;
-
-    SDL_Surface* img1 = SDL_ConvertSurface(temp1, winSurface->format, 0);
-    SDL_FreeSurface(temp1);
+    SDL_BlitSurface(background, NULL, winSurface, NULL);
 }
     
 bool Init()
