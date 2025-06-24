@@ -1,11 +1,13 @@
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <string>
 #include <stdlib.h>
 
-void Update();
+bool Update();
 void Start();
 bool Init();
 int Exit(int exitCode);
+std::string Input();
 
 
 SDL_Window* window;
@@ -24,13 +26,11 @@ int main()
     
     Start();
 
-    while(true)
+    while(Update())
     {
-        Update();
-
         //updating window
         SDL_UpdateWindowSurface(window);    
-        SDL_Delay(5000);
+        SDL_Delay(10);
     }
     
     return Exit(0);
@@ -42,17 +42,44 @@ void Start()
     //adding backgrounds
     SDL_Surface* tempBG = SDL_LoadBMP("spacebg.bmp");
     background = SDL_ConvertSurface(tempBG, winSurface->format, 0);
-    SDL_FreeSurface(tempBG); // flushing temp Background
-
+    SDL_FreeSurface(tempBG); // flushing temp Background    
+    
 }
 
 //Updating every frames
-void Update()
+bool Update()
 {
     SDL_BlitSurface(background, NULL, winSurface, NULL); // render img
     SDL_BlitScaled(background, NULL, winSurface, &windowLayout); //scaling img
+
+    //get input
+    std::string processes = Input();
+
+    if(processes == "exit")
+    {
+        return false; // stop looping
+    }
+
+    return true; // keep looping
 }
-    
+
+std::string Input()
+{
+    SDL_Event event;
+
+    //On event trigger
+    while(SDL_PollEvent(&event) != 0)
+    {
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                return "exit";
+        }
+    }
+
+    return "";
+}
+
 bool Init()
 {
     // ======= SETTINGS =========
