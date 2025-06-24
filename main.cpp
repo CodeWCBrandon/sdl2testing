@@ -79,7 +79,7 @@ void PlayerMovement(std::string& processes)
 void RenderRectWithColor(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a)
 {
     SDL_SetRenderDrawColor(renderer, r, g, b, a); // change renderer color
-    SDL_RenderFillRect(renderer, &player); // render
+    SDL_RenderFillRect(renderer, &rect); // render
 }
 
 std::string Input()
