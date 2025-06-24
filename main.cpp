@@ -9,6 +9,7 @@ int Exit(int exitCode);
 
 
 SDL_Window* window;
+SDL_Rect windowLayout;
 SDL_Surface* winSurface;
 SDL_Surface* background = nullptr;
 
@@ -39,19 +40,25 @@ int main()
 void Start()
 {
     //adding backgrounds
-    SDL_Surface* tempBG = SDL_LoadBMP("bg.bmp");
+    SDL_Surface* tempBG = SDL_LoadBMP("spacebg.bmp");
     background = SDL_ConvertSurface(tempBG, winSurface->format, 0);
     SDL_FreeSurface(tempBG); // flushing temp Background
+
 }
 
 //Updating every frames
 void Update()
 {
-    SDL_BlitSurface(background, NULL, winSurface, NULL);
+    SDL_BlitSurface(background, NULL, winSurface, NULL); // render img
+    SDL_BlitScaled(background, NULL, winSurface, &windowLayout); //scaling img
 }
     
 bool Init()
 {
+    // ======= SETTINGS =========
+    int width = 840;
+    int height = 600;
+
     //Check is SDL Initialized without an error
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
@@ -60,7 +67,7 @@ bool Init()
     }
 
     //Creating the window
-    window = SDL_CreateWindow("main", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("main", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 
     //Checking the window 
     if(!window)
@@ -71,6 +78,12 @@ bool Init()
 
     //Creating the window surface
     winSurface = SDL_GetWindowSurface(window);
+
+    //window layout for future use
+    windowLayout.x = 0;
+    windowLayout.y = 0;
+    windowLayout.w = width;
+    windowLayout.h = height;
 
     return true;
 }
