@@ -49,7 +49,10 @@ void Start()
     SDL_Surface* tempBG = SDL_LoadBMP("spacebg.bmp");
     background = SDL_CreateTextureFromSurface(renderer, tempBG);
     SDL_FreeSurface(tempBG); // flushing temp Background    
-    
+
+    //centering player
+    player.x = (windowLayout.w - player.w) / 2;
+    player.y = (windowLayout.h - player.h) / 2;
 }
 
 //Updating every frames
