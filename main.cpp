@@ -19,7 +19,7 @@ SDL_Texture* background = nullptr;
 SDL_Rect windowLayout;
 
 // ========= VARIABLES ==========
-SDL_Rect player = {50, 50, 100, 100};
+SDL_Rect player = {50, 50, 20, 20};
 
 // all technical setup
 int main() 
@@ -140,7 +140,7 @@ bool Init()
     }
 
     //Creating the window
-    int result = SDL_CreateWindowAndRenderer(width, height, NULL, &window, &renderer);
+    int result = SDL_CreateWindowAndRenderer(width, height, 0, &window, &renderer);
 
     //Checking the window 
     if(result != 0)
