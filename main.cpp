@@ -1,15 +1,16 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <string>
+#include <set>
 #include <stdlib.h>
 
 bool Init();
 void Start();
 bool Update();
-void PlayerMovement(std::string& processes);
+void PlayerMovement();
 void RenderRectWithColor(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a);
 int Exit(int exitCode);
-std::string Input();
+void Input();
 
 
 // ========= RENDERING ==========
@@ -17,6 +18,9 @@ SDL_Window* window;
 SDL_Renderer* renderer;
 SDL_Texture* background = nullptr;
 SDL_Rect windowLayout;
+
+// ========= INPUTS ===========
+std::set<SDL_Keycode> inputBuffer;
 
 // ========= VARIABLES ==========
 SDL_Rect player = {50, 50, 20, 20};
@@ -62,21 +66,20 @@ bool Update()
 
     RenderRectWithColor(renderer, player, 0, 255, 255, 255);
 
-    //get input
-    std::string processes = Input();
-    PlayerMovement(processes);
+    Input();
+    PlayerMovement();
 
     //processes
-    if(processes == "exit") return false;
+    if(inputBuffer.count(SDLK_ESCAPE)) return false;
     return true; // keep looping
 }
 
-void PlayerMovement(std::string& processes)
+void PlayerMovement()
 {
-    if(processes == "w") player.y -= 5;
-    else if(processes == "a") player.x -= 5;
-    else if(processes == "s") player.y += 5;
-    else if(processes == "d") player.x += 5;
+    if(inputBuffer.count(SDLK_w)) player.y -= 5;
+    if(inputBuffer.count(SDLK_a)) player.x -= 5;
+    if(inputBuffer.count(SDLK_s)) player.y += 5;
+    if(inputBuffer.count(SDLK_d)) player.x += 5;
 }
 
 void RenderRectWithColor(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a)
@@ -85,7 +88,7 @@ void RenderRectWithColor(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, 
     SDL_RenderFillRect(renderer, &rect); // render
 }
 
-std::string Input()
+void Input()
 {
     SDL_Event event;
 
@@ -94,39 +97,17 @@ std::string Input()
     {
         switch(event.type)
         {
-            case SDL_QUIT:
-                return "exit";
-                break;
-
             case SDL_KEYDOWN:
-                //on key down (keyboard input)
-                switch(event.key.keysym.sym)
-                {
-                    //on click w
-                    case SDLK_w:
-                        return "w";
-                    case SDLK_s:
-                        return "s";
-                    case SDLK_a:
-                        return "a";
-                    case SDLK_d:
-                        return "d";
-                }
+                //keyboard down
+                inputBuffer.insert(event.key.keysym.sym);
                 break;
-
-            case SDL_MOUSEBUTTONDOWN:
-                //on mouse button down
-                switch(event.button.button)
-                {
-                    case SDL_BUTTON_LEFT:
-                        std::cout << "Clicked left mouse\n";
-                        return "left-mouse";
-                }
+            
+            case SDL_KEYUP:
+                //keyboard up
+                inputBuffer.erase(event.key.keysym.sym);
                 break;
         }
     }
-
-    return "";
 }
 
 bool Init()
