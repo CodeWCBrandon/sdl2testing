@@ -74,6 +74,28 @@ std::string Input()
         {
             case SDL_QUIT:
                 return "exit";
+                break;
+
+            case SDL_KEYDOWN:
+                //on key down (keyboard input)
+                switch(event.key.keysym.sym)
+                {
+                    //on click w
+                    case SDLK_w:
+                        std::cout << "Clicked W\n";
+                        break;
+                }
+                break;
+
+            case SDL_MOUSEBUTTONDOWN:
+                //on mouse button down
+                switch(event.button.button)
+                {
+                    case SDL_BUTTON_LEFT:
+                        std::cout << "Clicked left mouse\n";
+                        break;
+                }
+                break;
         }
     }
 
