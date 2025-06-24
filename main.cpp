@@ -11,9 +11,9 @@ std::string Input();
 
 
 SDL_Window* window;
+SDL_Renderer* renderer;
 SDL_Rect windowLayout;
-SDL_Surface* winSurface;
-SDL_Surface* background = nullptr;
+SDL_Texture* background = nullptr;
 
 // all technical setup
 int main() 
@@ -28,9 +28,9 @@ int main()
 
     while(Update())
     {
-        //updating window
-        SDL_UpdateWindowSurface(window);    
-        SDL_Delay(10);
+        SDL_RenderPresent(renderer); // updating window
+        SDL_Delay(10); // delay per update
+        SDL_RenderClear(renderer); // clearing after rendering
     }
     
     return Exit(0);
@@ -41,7 +41,7 @@ void Start()
 {
     //adding backgrounds
     SDL_Surface* tempBG = SDL_LoadBMP("spacebg.bmp");
-    background = SDL_ConvertSurface(tempBG, winSurface->format, 0);
+    background = SDL_CreateTextureFromSurface(renderer, tempBG);
     SDL_FreeSurface(tempBG); // flushing temp Background    
     
 }
@@ -49,17 +49,13 @@ void Start()
 //Updating every frames
 bool Update()
 {
-    SDL_BlitSurface(background, NULL, winSurface, NULL); // render img
-    SDL_BlitScaled(background, NULL, winSurface, &windowLayout); //scaling img
+    SDL_RenderCopy(renderer, background, NULL, &windowLayout); // render image
 
     //get input
     std::string processes = Input();
 
-    if(processes == "exit")
-    {
-        return false; // stop looping
-    }
-
+    //processes
+    if(processes == "exit") return false;
     return true; // keep looping
 }
 
@@ -116,17 +112,14 @@ bool Init()
     }
 
     //Creating the window
-    window = SDL_CreateWindow("main", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+    int result = SDL_CreateWindowAndRenderer(width, height, NULL, &window, &renderer);
 
     //Checking the window 
-    if(!window)
+    if(result != 0)
     {
         std::cout << "failed to show the window\n" << SDL_GetError() << std::endl; 
         return false;
     }
-
-    //Creating the window surface
-    winSurface = SDL_GetWindowSurface(window);
 
     //window layout for future use
     windowLayout.x = 0;
@@ -140,6 +133,7 @@ bool Init()
 int Exit(int exitCode)
 {
     //Quitting
+    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
     return exitCode;
