@@ -43,8 +43,10 @@ void Start()
 void Update()
 {
     // Window background rectangle with colors
-    SDL_FillRect(winSurface, NULL, SDL_MapRGB(winSurface->format, 128, 128,128));
-    
+    SDL_Surface* temp1 = SDL_LoadBMP("testing.gif");
+    if(!temp1) std::cout << "Loading img error\n" << SDL_GetError() << std::endl;
+
+    SDL_Surface* img1 = SDL_ConvertSurface(temp1, winSurface->format, 0);
 }
     
 bool Init()
