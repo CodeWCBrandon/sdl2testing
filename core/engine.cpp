@@ -53,7 +53,11 @@ void Engine::RenderTexture(SDL_Renderer*& renderer, const char* texturePath, Obj
     SDL_FreeSurface(temp); // flushing
 
     //object to SDL_Rect
-    SDL_Rect rect = {obj.height, obj.width, obj.pos.xPos, obj.pos.yPos};
+    SDL_Rect rect;
+    rect.h = obj.height;
+    rect.w = obj.width;
+    rect.x = obj.pos.xPos;
+    rect.y = obj.pos.yPos;
 
     SDL_RenderCopy(renderer, texture, NULL, &rect);
 }
