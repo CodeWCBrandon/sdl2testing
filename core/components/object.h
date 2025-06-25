@@ -9,6 +9,7 @@ class Object
         double width;
         double height;
 
+        Object();
         Object(double xPos, double yPos, double width, double height);
         void Transform(double xPos, double yPos);
         void Scale(double width, double height);

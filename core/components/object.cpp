@@ -1,7 +1,11 @@
 #include "object.h"
 #include "vector2d.h"
 
-Object::Object(double xPos, double yPos, double width, double height) : pos(xPos, yPos)
+//default constructor
+Object::Object() : pos(0, 0), width(0), height(0) {}
+
+//constructor
+Object::Object(double xPos = 0, double yPos = 0, double width = 0, double height = 0) : pos(xPos, yPos)
 {
     this->width = width;
     this->height = height;
