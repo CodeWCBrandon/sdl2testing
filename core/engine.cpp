@@ -47,7 +47,7 @@ void Engine::RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, i
     SDL_RenderFillRect(renderer, &rect); // render
 }
 
-SDL_Texture* Engine::LoadTexture(SDL_Renderer*& renderer, const char* texturePath)
+SDL_Texture* Engine::LoadTexture(const char* texturePath)
 {
     SDL_Surface* temp = SDL_LoadBMP(texturePath);
     if(!temp)
@@ -56,7 +56,7 @@ SDL_Texture* Engine::LoadTexture(SDL_Renderer*& renderer, const char* texturePat
         return nullptr;
     }
 
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, temp);
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(Engine::renderer, temp);
 
     if(!texture)
     {
@@ -68,16 +68,9 @@ SDL_Texture* Engine::LoadTexture(SDL_Renderer*& renderer, const char* texturePat
     return texture;
 }
 
-void Engine::RenderTexture(SDL_Renderer*& renderer, SDL_Texture*& texture, Object& obj)
+void Engine::RenderTexture(Object& obj)
 {
-    //object to SDL_Rect
-    SDL_Rect rect;
-    rect.h = obj.height;
-    rect.w = obj.width;
-    rect.x = obj.pos.xPos;
-    rect.y = obj.pos.yPos;
-
-    SDL_RenderCopy(renderer, texture, NULL, &rect);
+    SDL_RenderCopy(Engine::renderer, obj.texture, NULL, &obj.rectFormat);
 }
 
 void Engine::Input()

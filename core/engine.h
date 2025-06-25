@@ -30,6 +30,6 @@ class Engine
 
         //handle rendering
         static void RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a);
-        static void RenderTexture(SDL_Renderer*& renderer, SDL_Texture*& texture, Object& obj);
-        static SDL_Texture* LoadTexture(SDL_Renderer*& renderer, const char* texturePath);
+        static void RenderTexture(Object& obj);
+        static SDL_Texture* LoadTexture(const char* texturePath);
 };
