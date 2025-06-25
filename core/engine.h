@@ -6,7 +6,8 @@
 #include <set>
 #include <stdlib.h>
 #include <vector>
-#include "components/object.h"
+
+class Object; // forward declaration
 
 class Engine
 {

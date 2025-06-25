@@ -39,3 +39,8 @@ void Object::SetTexture(const char* texturePath)
 {
     this->texture = Engine::LoadTexture(texturePath);
 }
+
+void Object::AddToRenderBuffer()
+{
+    Engine::AddToRenderBuffer(*this);
+}

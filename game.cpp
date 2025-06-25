@@ -6,16 +6,13 @@ void PlayerMovement();
 
 // ========= VARIABLES ==========
 SDL_Rect player = {50, 50, 20, 20};
-Object background;
-SDL_Texture* backgroundTexture;
 
 //Game logic
 void Engine::Start()
 {
     //assigning global variables value
-    background.Transform(0, 0); background.Scale(Engine::windowLayout.w, Engine::windowLayout.h);
-    background.SetTexture("assets/spacebg.bmp");
-    Engine::AddToRenderBuffer(background);
+    Object background("assets/spacebg.bmp", 0, 0, Engine::windowLayout.w, Engine::windowLayout.h);
+    background.AddToRenderBuffer();
     
     //centering player
     player.x = (windowLayout.w - player.w) / 2;

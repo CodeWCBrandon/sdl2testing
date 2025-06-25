@@ -16,5 +16,5 @@ class Object
         void Transform(double xPos, double yPos);
         void Scale(double width, double height);
         void SetTexture(const char* texturePath);
-
+        void AddToRenderBuffer();
 };
