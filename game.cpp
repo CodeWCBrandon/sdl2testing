@@ -10,7 +10,7 @@ SDL_Rect player = {50, 50, 20, 20};
 void Engine::Start()
 {
     //adding backgrounds
-    SDL_Surface* tempBG = SDL_LoadBMP("spacebg.bmp");
+    SDL_Surface* tempBG = SDL_LoadBMP("assets/spacebg.bmp");
     background = SDL_CreateTextureFromSurface(renderer, tempBG);
     SDL_FreeSurface(tempBG); // flushing temp Background    
     
