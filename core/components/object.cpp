@@ -2,14 +2,15 @@
 #include "vector2d.h"
 
 //default constructor
-Object::Object() : pos(0, 0), width(0), height(0) {}
+Object::Object() : pos(0, 0), width(0), height(0), layerMask(0) {}
 
 //constructor
-Object::Object(const char* texturePath, double xPos = 0, double yPos = 0, double width = 0, double height = 0) : pos(xPos, yPos)
+Object::Object(const char* texturePath, double xPos = 0, double yPos = 0, double width = 0, double height = 0, int layerMask = 0) : pos(xPos, yPos)
 {
     this->texture = Engine::LoadTexture(texturePath);
     this->width = width;
     this->height = height;
+    this->layerMask = layerMask;
 
     rectFormat.h = height;
     rectFormat.w = width;

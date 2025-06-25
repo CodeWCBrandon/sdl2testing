@@ -6,6 +6,7 @@
 #include <set>
 #include <stdlib.h>
 #include <vector>
+#include <algorithm>
 
 class Object; // forward declaration
 

@@ -10,9 +10,10 @@ class Object
         Vector2d pos;
         double width;
         double height;
+        int layerMask;
 
         Object();
-        Object(const char* texturePath, double xPos, double yPos, double width, double height);
+        Object(const char* texturePath, double xPos, double yPos, double width, double height, int layerMask);
         void Transform(double xPos, double yPos);
         void Scale(double width, double height);
         void SetTexture(const char* texturePath);

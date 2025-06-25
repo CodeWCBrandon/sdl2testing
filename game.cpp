@@ -11,7 +11,7 @@ SDL_Rect player = {50, 50, 20, 20};
 void Engine::Start()
 {
     //assigning global variables value
-    Object background("assets/spacebg.bmp", 0, 0, Engine::windowLayout.w, Engine::windowLayout.h);
+    Object background("assets/spacebg.bmp", 0, 0, Engine::windowLayout.w, Engine::windowLayout.h, 0);
     background.AddToRenderBuffer();
     
     //centering player
@@ -24,7 +24,6 @@ bool Engine::Update()
 {
     Engine::RenderTexture();
     RenderRect(renderer, player, 0, 255, 255, 255);
-    
     PlayerMovement();
     
     //processes
