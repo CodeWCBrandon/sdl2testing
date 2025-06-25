@@ -50,12 +50,12 @@ void Engine::RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, i
 
 void Engine::AddToRenderBuffer(Object& obj)
 {
+    Engine::renderBuffer.push_back(obj);
+
     //sort based on the layermask
     std::sort(Engine::renderBuffer.begin(), Engine::renderBuffer.end(), [](const Object& a, const Object& b){
         return a.layerMask < b.layerMask;
     });
-
-    Engine::renderBuffer.push_back(obj);
 }
 
 SDL_Texture* Engine::LoadTexture(const char* texturePath)
