@@ -17,17 +17,17 @@ class Engine
         static std::set<SDL_Keycode> inputBuffer;
 
         //normal state
-        static const bool Init();
-        static const void Start();
-        static const bool Update();
-        static const int Exit(int exitCode);
+        static bool Init();
+        static void Start();
+        static bool Update();
+        static int Exit(int exitCode);
 
         //input handling
-        static const void Input();
-        static const void IsKeyDown(SDL_Keycode key);
+        static void Input();
+        static void IsKeyDown(SDL_Keycode key);
 
         //handle rendering
-        static const void RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a);
-        static const void RenderTexture(SDL_Renderer*& renderer, const char* texturePath, Object& obj);
+        static void RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a);
+        static void RenderTexture(SDL_Renderer*& renderer, const char* texturePath, Object& obj);
 
 };

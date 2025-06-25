@@ -3,17 +3,12 @@
 void PlayerMovement();
 
 // ========= VARIABLES ==========
-SDL_Texture* background;
 SDL_Rect player = {50, 50, 20, 20};
+Object background = Object(0, 0, 840, 600);
 
 //Game logic
 void Engine::Start()
 {
-    //adding backgrounds
-    SDL_Surface* tempBG = SDL_LoadBMP("assets/spacebg.bmp");
-    background = SDL_CreateTextureFromSurface(renderer, tempBG);
-    SDL_FreeSurface(tempBG); // flushing temp Background    
-    
     //centering player
     player.x = (windowLayout.w - player.w) / 2;
     player.y = (windowLayout.h - player.h) / 2;
@@ -22,7 +17,7 @@ void Engine::Start()
 //Updating every frames
 bool Engine::Update()
 {
-    SDL_RenderCopy(renderer, background, NULL, &windowLayout); // render image
+    Engine::RenderTexture(Engine::renderer, "assets/spacebg.bmp", background);
     RenderRect(renderer, player, 0, 255, 255, 255);
     
     PlayerMovement();

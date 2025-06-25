@@ -5,11 +5,10 @@
 class Object
 {
     public:
-        SDL_Texture* texture;
         Vector2d pos;
         double width;
         double height;
 
-        Object(SDL_Texture*, double, double, double, double);
+        Object(double xPos, double yPos, double width, double height);
 
 };
