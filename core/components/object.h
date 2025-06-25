@@ -6,6 +6,7 @@ class Object
 {
     public:
         SDL_Texture* texture;
+        SDL_Rect rectFormat;
         Vector2d pos;
         double width;
         double height;

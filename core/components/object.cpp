@@ -10,18 +10,29 @@ Object::Object(const char* texturePath, double xPos = 0, double yPos = 0, double
     this->texture = Engine::LoadTexture(Engine::renderer, texturePath);
     this->width = width;
     this->height = height;
+
+    rectFormat.h = height;
+    rectFormat.w = width;
+    rectFormat.x = xPos;
+    rectFormat.y = yPos;
 }
 
 void Object::Transform(double xPos, double yPos)
 {
     this->pos.xPos = xPos;
     this->pos.yPos = yPos;
+    
+    rectFormat.x = xPos;
+    rectFormat.y = yPos;
 }
 
 void Object::Scale(double width, double height)
 {
     this->width = width;
     this->height = height;
+
+    rectFormat.h = height;
+    rectFormat.w = width;
 }
 
 void Object::SetTexture(const char* texturePath)
