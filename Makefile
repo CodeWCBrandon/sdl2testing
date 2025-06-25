@@ -16,7 +16,6 @@ $(TARGET): $(OBJ)
 
 run: $(TARGET) 
 	./$(TARGET)
-	$(MAKE) clear
 
 clear:
 	rm -f $(OBJ) $(TARGET)

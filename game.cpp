@@ -1,14 +1,22 @@
 #include "core/engine.h"
+#include "core/components/object.h"
+#include "core/components/vector2d.h"
 
 void PlayerMovement();
 
 // ========= VARIABLES ==========
 SDL_Rect player = {50, 50, 20, 20};
-Object background = Object(0, 0, 840, 600);
+Object background(0, 0, 1920, 1080);
+SDL_Texture* backgroundTexture = Engine::LoadTexture(Engine::renderer, "assets/spacebg.bmp");
 
 //Game logic
 void Engine::Start()
 {
+    //load manually
+    SDL_Surface* temp = SDL_LoadBMP("assets/spacebg.bmp");
+    backgroundTexture = SDL_CreateTextureFromSurface(renderer, temp);
+    SDL_FreeSurface(temp);
+
     //centering player
     player.x = (windowLayout.w - player.w) / 2;
     player.y = (windowLayout.h - player.h) / 2;
@@ -17,7 +25,7 @@ void Engine::Start()
 //Updating every frames
 bool Engine::Update()
 {
-    Engine::RenderTexture(Engine::renderer, "assets/spacebg.bmp", background);
+    SDL_RenderCopy(renderer, backgroundTexture, NULL, &windowLayout);
     RenderRect(renderer, player, 0, 255, 255, 255);
     
     PlayerMovement();

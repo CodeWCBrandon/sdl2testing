@@ -1,12 +1,12 @@
 #pragma once
-#include "components/object.h"
-#include "components/vector2d.h"
 
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <string>
 #include <set>
 #include <stdlib.h>
+
+class Object;
 
 class Engine
 {
@@ -28,6 +28,6 @@ class Engine
 
         //handle rendering
         static void RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a);
-        static void RenderTexture(SDL_Renderer*& renderer, const char* texturePath, Object& obj);
-
+        static void RenderTexture(SDL_Renderer*& renderer, SDL_Texture*& texture, Object& obj);
+        static SDL_Texture* LoadTexture(SDL_Renderer*& renderer, const char* texturePath);
 };

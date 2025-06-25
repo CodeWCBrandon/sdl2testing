@@ -1,4 +1,5 @@
 #include "engine.h"
+#include "components/object.h"
 
 // ========= RENDERING ==========
 SDL_Window* Engine::window = nullptr;
@@ -46,12 +47,24 @@ void Engine::RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, i
     SDL_RenderFillRect(renderer, &rect); // render
 }
 
-void Engine::RenderTexture(SDL_Renderer*& renderer, const char* texturePath, Object& obj)
+SDL_Texture* Engine::LoadTexture(SDL_Renderer*& renderer, const char* texturePath)
 {
     SDL_Surface* temp = SDL_LoadBMP(texturePath);
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, temp);
-    SDL_FreeSurface(temp); // flushing
+    if(!temp)
+    {
+        std::cout << "Texture failed to load: " << texturePath << "\n" << SDL_GetError();
+        return nullptr;
+    }
 
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, temp);
+    SDL_FreeSurface(temp);
+
+
+    return texture;
+}
+
+void Engine::RenderTexture(SDL_Renderer*& renderer, SDL_Texture*& texture, Object& obj)
+{
     //object to SDL_Rect
     SDL_Rect rect;
     rect.h = obj.height;
