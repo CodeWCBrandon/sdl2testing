@@ -6,8 +6,7 @@
 #include <set>
 #include <stdlib.h>
 #include <vector>
-
-class Object;
+#include "components/object.h"
 
 class Engine
 {
@@ -16,7 +15,7 @@ class Engine
         static SDL_Window* window;
         static SDL_Renderer* renderer;
         static std::set<SDL_Keycode> inputBuffer;
-        static std::vector<SDL_Texture*> renderBuffer;
+        static std::vector<Object> renderBuffer;
 
         //normal state
         static bool Init();
@@ -30,6 +29,7 @@ class Engine
 
         //handle rendering
         static void RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a);
-        static void RenderTexture(Object& obj);
+        static void RenderTexture();
+        static void AddToRenderBuffer(Object& obj);
         static SDL_Texture* LoadTexture(const char* texturePath);
 };

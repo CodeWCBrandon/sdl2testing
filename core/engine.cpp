@@ -8,6 +8,7 @@ SDL_Rect Engine::windowLayout;
 
 // ========= INPUTS ===========
 std::set<SDL_Keycode> Engine::inputBuffer;
+std::vector<Object> Engine::renderBuffer;
 
 bool Engine::Init()
 {
@@ -47,6 +48,11 @@ void Engine::RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, i
     SDL_RenderFillRect(renderer, &rect); // render
 }
 
+void Engine::AddToRenderBuffer(Object& obj)
+{
+    Engine::renderBuffer.push_back(obj);
+}
+
 SDL_Texture* Engine::LoadTexture(const char* texturePath)
 {
     SDL_Surface* temp = SDL_LoadBMP(texturePath);
@@ -68,9 +74,12 @@ SDL_Texture* Engine::LoadTexture(const char* texturePath)
     return texture;
 }
 
-void Engine::RenderTexture(Object& obj)
+void Engine::RenderTexture()
 {
-    SDL_RenderCopy(Engine::renderer, obj.texture, NULL, &obj.rectFormat);
+    for(auto obj : Engine::renderBuffer)
+    {
+        SDL_RenderCopy(Engine::renderer, obj.texture, NULL, &obj.rectFormat);
+    }
 }
 
 void Engine::Input()

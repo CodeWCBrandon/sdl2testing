@@ -15,6 +15,7 @@ void Engine::Start()
     //assigning global variables value
     background.Transform(0, 0); background.Scale(Engine::windowLayout.w, Engine::windowLayout.h);
     background.SetTexture("assets/spacebg.bmp");
+    Engine::AddToRenderBuffer(background);
     
     //centering player
     player.x = (windowLayout.w - player.w) / 2;
@@ -24,7 +25,7 @@ void Engine::Start()
 //Updating every frames
 bool Engine::Update()
 {
-    Engine::RenderTexture(background);
+    Engine::RenderTexture();
     RenderRect(renderer, player, 0, 255, 255, 255);
     
     PlayerMovement();
