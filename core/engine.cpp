@@ -8,7 +8,7 @@ SDL_Rect Engine::windowLayout;
 // ========= INPUTS ===========
 std::set<SDL_Keycode> Engine::inputBuffer;
 
-bool Engine::Init()
+bool const Engine::Init()
 {
     // ======= DISPLAY SIZE =========
     int width = 840;
@@ -40,13 +40,13 @@ bool Engine::Init()
     return true;
 }
 
-void Engine::RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a)
+void const Engine::RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a)
 {
     SDL_SetRenderDrawColor(renderer, r, g, b, a); // change renderer color
     SDL_RenderFillRect(renderer, &rect); // render
 }
 
-void Engine::RenderTexture(SDL_Renderer*& renderer, const char* texturePath, Object& obj)
+const void Engine::RenderTexture(SDL_Renderer*& renderer, const char* texturePath, Object& obj)
 {
     SDL_Surface* temp = SDL_LoadBMP(texturePath);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, temp);
@@ -58,7 +58,7 @@ void Engine::RenderTexture(SDL_Renderer*& renderer, const char* texturePath, Obj
     SDL_RenderCopy(renderer, texture, NULL, &rect);
 }
 
-void Engine::Input()
+void const Engine::Input()
 {
     SDL_Event event;
 
@@ -81,7 +81,7 @@ void Engine::Input()
 }
 
 
-int Engine::Exit(int exitCode)
+int const Engine::Exit(int exitCode)
 {
     //Quitting
     SDL_DestroyRenderer(renderer);
