@@ -5,6 +5,7 @@
 #include <string>
 #include <set>
 #include <stdlib.h>
+#include <vector>
 
 class Object;
 
@@ -15,6 +16,7 @@ class Engine
         static SDL_Window* window;
         static SDL_Renderer* renderer;
         static std::set<SDL_Keycode> inputBuffer;
+        static std::vector<SDL_Texture*> renderBuffer;
 
         //normal state
         static bool Init();

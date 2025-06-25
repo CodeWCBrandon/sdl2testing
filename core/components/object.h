@@ -5,13 +5,15 @@
 class Object
 {
     public:
+        SDL_Texture* texture;
         Vector2d pos;
         double width;
         double height;
 
         Object();
-        Object(double xPos, double yPos, double width, double height);
+        Object(const char* texturePath, double xPos, double yPos, double width, double height);
         void Transform(double xPos, double yPos);
         void Scale(double width, double height);
+        void SetTexture(const char* texturePath);
 
 };

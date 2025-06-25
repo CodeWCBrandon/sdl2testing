@@ -63,9 +63,7 @@ SDL_Texture* Engine::LoadTexture(SDL_Renderer*& renderer, const char* texturePat
         std::cout << "Texture failed to load: " << texturePath << "\n" << SDL_GetError();
         return nullptr;
     }
-
     SDL_FreeSurface(temp);
-
 
     return texture;
 }
