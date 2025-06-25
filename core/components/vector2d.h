@@ -7,6 +7,6 @@ class Vector2d
         double xPos;
         double yPos;
 
-        Vector2d(double xPos = 0, double yPos = 0);
+        Vector2d(double, double);
         void Normalize();
 };
