@@ -46,6 +46,18 @@ void Engine::RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, i
     SDL_RenderFillRect(renderer, &rect); // render
 }
 
+void Engine::RenderTexture(SDL_Renderer*& renderer, const char* texturePath, Object& obj)
+{
+    SDL_Surface* temp = SDL_LoadBMP(texturePath);
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, temp);
+    SDL_FreeSurface(temp); // flushing
+
+    //object to SDL_Rect
+    SDL_Rect rect = {obj.height, obj.width, obj.pos.xPos, obj.pos.yPos};
+
+    SDL_RenderCopy(renderer, texture, NULL, &rect);
+}
+
 void Engine::Input()
 {
     SDL_Event event;

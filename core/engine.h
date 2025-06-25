@@ -1,4 +1,7 @@
 #pragma once
+#include "components/object.h"
+#include "components/vector2d.h"
+
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <string>
@@ -23,5 +26,8 @@ class Engine
         static void Input();
         static void IsKeyDown(SDL_Keycode key);
 
+        //handle rendering
         static void RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a);
+        static void RenderTexture(SDL_Renderer*& renderer, const char* texturePath, Object& obj);
+
 };
