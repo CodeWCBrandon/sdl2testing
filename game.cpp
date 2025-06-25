@@ -4,26 +4,20 @@
 
 void PlayerMovement();
 
-// ========= VARIABLES ==========
-SDL_Rect player = {50, 50, 20, 20};
-
 //Game logic
 void Engine::Start()
 {
     //assigning global variables value
     Object background("assets/spacebg.bmp", 0, 0, Engine::windowLayout.w, Engine::windowLayout.h, 0);
     background.AddToRenderBuffer();
+    Object player("assets/playerShip.bmp", windowLayout.w / 2, windowLayout.h / 2, 20, 20, 1);
+    player.AddToRenderBuffer();
     
-    //centering player
-    player.x = (windowLayout.w - player.w) / 2;
-    player.y = (windowLayout.h - player.h) / 2;
 }
 
 //Updating every frames
 bool Engine::Update()
 {
-    Engine::RenderTexture();
-    RenderRect(renderer, player, 0, 255, 255, 255);
     PlayerMovement();
     
     //processes
@@ -33,8 +27,8 @@ bool Engine::Update()
 
 void PlayerMovement()
 {
-    if(Engine::inputBuffer.count(SDLK_w)) player.y -= 5;
-    if(Engine::inputBuffer.count(SDLK_a)) player.x -= 5;
-    if(Engine::inputBuffer.count(SDLK_s)) player.y += 5;
-    if(Engine::inputBuffer.count(SDLK_d)) player.x += 5;
+    // if(Engine::inputBuffer.count(SDLK_w)) player.y -= 5;
+    // if(Engine::inputBuffer.count(SDLK_a)) player.x -= 5;
+    // if(Engine::inputBuffer.count(SDLK_s)) player.y += 5;
+    // if(Engine::inputBuffer.count(SDLK_d)) player.x += 5;
 }

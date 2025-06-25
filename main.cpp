@@ -13,6 +13,7 @@ int main()
 
     while(Engine::Update())
     {
+        Engine::RenderTexture();
         Engine::Input();
         SDL_RenderPresent(Engine::renderer); // updating window
         SDL_Delay(10); // delay per update
