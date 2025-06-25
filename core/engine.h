@@ -23,5 +23,5 @@ class Engine
         static void Input();
         static void IsKeyDown(SDL_Keycode key);
 
-        static void RenderRectWithColor(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a);
+        static void RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a);
 };

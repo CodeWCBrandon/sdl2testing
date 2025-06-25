@@ -40,7 +40,7 @@ bool Engine::Init()
     return true;
 }
 
-void Engine::RenderRectWithColor(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a)
+void Engine::RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a)
 {
     SDL_SetRenderDrawColor(renderer, r, g, b, a); // change renderer color
     SDL_RenderFillRect(renderer, &rect); // render

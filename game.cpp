@@ -23,7 +23,7 @@ void Engine::Start()
 bool Engine::Update()
 {
     SDL_RenderCopy(renderer, background, NULL, &windowLayout); // render image
-    RenderRectWithColor(renderer, player, 0, 255, 255, 255);
+    RenderRect(renderer, player, 0, 255, 255, 255);
     
     PlayerMovement();
     
