@@ -1,7 +1,7 @@
 #include "vector2d.h"
 #include <cmath>
 
-Vector2d::Vector2d(double xPos, double yPos)
+Vector2d::Vector2d(double xPos = 0, double yPos = 0)
 {
     this->xPos = xPos;
     this->yPos = yPos;
