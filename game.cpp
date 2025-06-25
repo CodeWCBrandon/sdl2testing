@@ -4,13 +4,16 @@
 
 void PlayerMovement();
 
+Object player;
+
 //Game logic
 void Engine::Start()
 {
     //assigning global variables value
     Object background("assets/spacebg.bmp", 0, 0, Engine::windowLayout.w, Engine::windowLayout.h, 0);
     background.AddToRenderBuffer();
-    Object player("assets/playerShip.bmp", windowLayout.w / 2, windowLayout.h / 2, 20, 20, 1);
+    player.SetTexture("assets/playerShip.bmp"); player.Transform(windowLayout.w / 2, windowLayout.h / 2);
+    player.Scale(20, 20);
     player.AddToRenderBuffer();
     
 }
@@ -27,8 +30,8 @@ bool Engine::Update()
 
 void PlayerMovement()
 {
-    // if(Engine::inputBuffer.count(SDLK_w)) player.y -= 5;
-    // if(Engine::inputBuffer.count(SDLK_a)) player.x -= 5;
-    // if(Engine::inputBuffer.count(SDLK_s)) player.y += 5;
-    // if(Engine::inputBuffer.count(SDLK_d)) player.x += 5;
+    if(Engine::inputBuffer.count(SDLK_w)) player.pos.yPos -= 5;
+    if(Engine::inputBuffer.count(SDLK_a)) player.pos.xPos -= 5;
+    if(Engine::inputBuffer.count(SDLK_s)) player.pos.yPos += 5;
+    if(Engine::inputBuffer.count(SDLK_d)) player.pos.xPos += 5;
 }
