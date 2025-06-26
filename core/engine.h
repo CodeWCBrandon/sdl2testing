@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <vector>
 #include <algorithm>
+#include <iomanip>
 
 class Object; // forward declaration
 class Entity;
@@ -37,4 +38,7 @@ class Engine
         static void RenderTexture();
         static void AddToRenderBuffer(Entity* obj);
         static SDL_Texture* LoadTexture(SDL_Surface*& surface);
+
+        //debugging
+        static void Debug();
 };
