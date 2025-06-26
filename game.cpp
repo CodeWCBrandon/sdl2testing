@@ -13,7 +13,9 @@ class Player
 };
 
 Player player;
+Text* score;
 
+int currentScore = 0;
 
 //Game logic
 void Engine::Start()
@@ -28,11 +30,10 @@ void Engine::Start()
     player.object->AddToRenderBuffer();
 
     //other stuff
-    Text* test = new Text("hello world lol", 25, 25, 100, 10, 1);
-    test->SetFont("assets/fonts/ARCADE_N.TTF", 20);
-    test->SetColor(255, 255, 255, 255);
-    test->AddToRenderBuffer();
-    
+    score = new Text("Score: " + std::to_string(currentScore), 25, 25, 100, 12, 1);
+    score->SetFont("assets/fonts/ARCADE_N.TTF", 20);
+    score->SetColor(255, 255, 255, 255);
+    score->AddToRenderBuffer();
     
 }
 
@@ -40,6 +41,9 @@ void Engine::Start()
 bool Engine::Update()
 {
     PlayerMovement();
+    score->SetText("Score: " + std::to_string(currentScore));
+
+    if(Engine::inputBuffer.count(SDLK_SPACE)) currentScore++;
     
     //processes
     if(Engine::inputBuffer.count(SDLK_ESCAPE)) return false;

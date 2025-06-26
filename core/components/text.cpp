@@ -10,13 +10,9 @@ Entity(xPos, yPos, width, height, layerMask), red(0), green(0), blue(0)
     UpdateRectFormat();
 }
 
-void Text::SetText(std::string text, int red, int green, int blue, int alpha)
+void Text::SetText(std::string text)
 {
     this->text = text;
-    this->red = red;
-    this->green = green;
-    this->blue = blue;
-    this->alpha = alpha;
     SetTexture();
 }
 
