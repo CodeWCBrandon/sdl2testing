@@ -2,10 +2,10 @@
 #include "vector2d.h"
 
 //default constructor
-Object::Object() : pos(0, 0), width(0), height(0), layerMask(0) {}
+Object::Object() : position(0, 0), width(0), height(0), layerMask(0) {}
 
 //constructor
-Object::Object(const char* texturePath, double xPos = 0, double yPos = 0, double width = 0, double height = 0, int layerMask = 0) : pos(xPos, yPos)
+Object::Object(const char* texturePath, double x = 0, double y = 0, double width = 0, double height = 0, int layerMask = 0) : position(x, y)
 {
     this->texture = Engine::LoadTexture(texturePath);
     this->width = width;
@@ -14,17 +14,19 @@ Object::Object(const char* texturePath, double xPos = 0, double yPos = 0, double
 
     rectFormat.h = height;
     rectFormat.w = width;
-    rectFormat.x = xPos;
-    rectFormat.y = yPos;
+    rectFormat.x = x;
+    rectFormat.y = y;
 }
 
-void Object::Transform(double xPos, double yPos)
+void Object::Transform(double x, double y)
 {
-    this->pos.xPos = xPos;
-    this->pos.yPos = yPos;
+    this->position.x = x;
+    this->position.y = y;
 
-    rectFormat.x = xPos;
-    rectFormat.y = yPos;
+    rectFormat.x = x;
+    rectFormat.y = y;
+
+    UpdateRectFormat();
 }
 
 void Object::Scale(double width, double height)
@@ -34,6 +36,16 @@ void Object::Scale(double width, double height)
 
     rectFormat.h = height;
     rectFormat.w = width;
+    
+    UpdateRectFormat();
+}
+
+void Object::UpdateRectFormat()
+{
+    this->rectFormat.h = height;
+    this->rectFormat.w = width;
+    this->rectFormat.x = position.x;
+    this->rectFormat.y = position.y;
 }
 
 void Object::SetTexture(const char* texturePath)

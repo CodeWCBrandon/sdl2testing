@@ -1,19 +1,19 @@
 #include "vector2d.h"
 #include <cmath>
 
-Vector2d::Vector2d(double xPos = 0, double yPos = 0)
+Vector2d::Vector2d(double x = 0, double y = 0)
 {
-    this->xPos = xPos;
-    this->yPos = yPos;
+    this->x = x;
+    this->y = y;
 }
 
 void Vector2d::Normalize()
 {
-    double magnitude = std::sqrt(xPos * xPos + yPos * yPos);
+    double magnitude = std::sqrt(x * x + y * y);
 
     if(magnitude > 0.00f)
     {
-        this->xPos = this->xPos / magnitude;
-        this->yPos = this->yPos / magnitude;
+        this->x = this->x / magnitude;
+        this->y = this->y / magnitude;
     }
 }

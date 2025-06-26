@@ -7,7 +7,7 @@ class Object
     public:
         SDL_Texture* texture;
         SDL_Rect rectFormat;
-        Vector2d pos;
+        Vector2d position;
         double width;
         double height;
         int layerMask;
@@ -18,5 +18,6 @@ class Object
         void Scale(double width, double height);
         void SetTexture(const char* texturePath);
         void SetLayerMask(int layerMask);
+        void UpdateRectFormat();
         void AddToRenderBuffer();
 };

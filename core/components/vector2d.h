@@ -4,9 +4,9 @@
 class Vector2d
 {
     public:
-        double xPos;
-        double yPos;
+        double x;
+        double y;
 
-        Vector2d(double xPos, double yPos);
+        Vector2d(double x, double y);
         void Normalize();
 };

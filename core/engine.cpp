@@ -83,7 +83,6 @@ void Engine::RenderTexture()
 {
     for(auto obj : Engine::renderBuffer)
     {
-        std::cout << obj->layerMask << "\n";
         SDL_RenderCopy(Engine::renderer, obj->texture, NULL, &obj->rectFormat);
     }
 }
