@@ -7,6 +7,7 @@ Text::Text(std::string text, double xPos, double yPos, double width, double heig
 Entity(xPos, yPos, width, height, layerMask), red(0), green(0), blue(0)
 {
     this->text = text;
+    UpdateRectFormat();
 }
 
 void Text::SetText(std::string text, int red, int green, int blue, int alpha)
@@ -26,6 +27,16 @@ void Text::SetColor(int red, int green, int blue, int alpha)
     this->alpha = alpha;
 }
 
+void Text::SetFont(const char* fontPath, int fontSize)
+{
+    this->font = TTF_OpenFont(fontPath, fontSize);
+    if(!font)
+    {
+        std::cout << "Failed to load font: " << fontPath << TTF_GetError() << std::endl;
+        return;
+    }
+}
+
 void Text::SetTexture()
 {
     SDL_Surface* textSurface;
@@ -35,5 +46,7 @@ void Text::SetTexture()
     color.g = green;
     color.b = blue;
     color.a = alpha;
-    
+
+    textSurface = TTF_RenderText_Solid(font, text.c_str(), color);
+    texture = Engine::LoadTexture(textSurface);
 }

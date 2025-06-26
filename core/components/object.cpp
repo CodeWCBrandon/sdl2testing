@@ -14,7 +14,8 @@ Entity(x, y, width, height, layerMask)
 
 void Object::SetTexture(const char* texturePath)
 {
-    texture = Engine::LoadTexture(texturePath);
+    SDL_Surface* surface = SDL_LoadBMP(texturePath);
+    texture = Engine::LoadTexture(surface);
     
     if(!texture)
     {

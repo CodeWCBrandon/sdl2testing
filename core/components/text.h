@@ -6,6 +6,7 @@
 class Text : public Entity
 {
     public:
+        TTF_Font* font;
         std::string text;
         int red;
         int green;
@@ -15,6 +16,7 @@ class Text : public Entity
         Text();
         Text(std::string text, double xPos, double yPos, double width, double height, int layerMask);
 
+        void SetFont(const char* fontPath, int fontSize);
         void SetText(std::string text, int red, int green, int blue, int alpha);
         void SetColor(int red, int green, int blue, int alpha);
         void InitText();

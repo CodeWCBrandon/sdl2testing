@@ -65,23 +65,22 @@ void Engine::AddToRenderBuffer(Entity* obj)
     });
 }
 
-SDL_Texture* Engine::LoadTexture(const char* texturePath)
+SDL_Texture* Engine::LoadTexture(SDL_Surface*& surface)
 {
-    SDL_Surface* temp = SDL_LoadBMP(texturePath);
-    if(!temp)
+    if(!surface)
     {
-        std::cout << "Texture failed to load: " << texturePath << "\n" << SDL_GetError();
+        std::cout << "Texture failed to load: \n" << SDL_GetError();
         return nullptr;
     }
 
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(Engine::renderer, temp);
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(Engine::renderer, surface);
 
     if(!texture)
     {
-        std::cout << "Texture failed to load: " << texturePath << "\n" << SDL_GetError();
+        std::cout << "Texture failed to load \n" << SDL_GetError();
         return nullptr;
     }
-    SDL_FreeSurface(temp);
+    SDL_FreeSurface(surface);
 
     return texture;
 }
