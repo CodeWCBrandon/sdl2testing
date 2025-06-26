@@ -8,5 +8,5 @@ class Vector2d
         double y;
 
         Vector2d(double x, double y);
-        void Normalize();
+        static void Normalize(double& x, double& y);
 };

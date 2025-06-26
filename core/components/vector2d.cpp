@@ -7,13 +7,13 @@ Vector2d::Vector2d(double x = 0, double y = 0)
     this->y = y;
 }
 
-void Vector2d::Normalize()
+void Vector2d::Normalize(double& x, double& y)
 {
     double magnitude = std::sqrt(x * x + y * y);
 
     if(magnitude > 0.00f)
     {
-        this->x = this->x / magnitude;
-        this->y = this->y / magnitude;
+        x = x / magnitude;
+        y = y / magnitude;
     }
 }
