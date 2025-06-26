@@ -11,6 +11,7 @@
 
 class Object; // forward declaration
 class Entity;
+class Text;
 
 class Engine
 {

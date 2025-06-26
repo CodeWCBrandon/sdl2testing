@@ -1,6 +1,8 @@
 #include "engine.h"
 #include "components/object.h"
 #include "components/entity.h"
+#include "components/vector2d.h"
+#include "components/text.h"
 
 // ========= RENDERING ==========
 SDL_Window* Engine::window = nullptr;

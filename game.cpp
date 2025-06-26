@@ -1,6 +1,7 @@
 #include "core/engine.h"
 #include "core/components/object.h"
 #include "core/components/vector2d.h"
+#include "core/components/text.h"
 
 void PlayerMovement();
 
@@ -20,12 +21,18 @@ void Engine::Start()
     //assigning global variables value
     Object* background = new Object("assets/spacebg.bmp", 0, 0, windowLayout.w, windowLayout.h, 0);
     background->AddToRenderBuffer();
+
+    //player
     player.object = new Object("assets/playerShip.bmp", windowLayout.w / 2, windowLayout.h / 2, 20, 20, 1);
     player.speed = 3;
     player.object->AddToRenderBuffer();
 
     //other stuff
-
+    Text* test = new Text("hello world lol", 25, 25, 100, 10, 1);
+    test->SetFont("assets/fonts/ARCADE_N.TTF", 20);
+    test->SetColor(255, 255, 255, 255);
+    test->AddToRenderBuffer();
+    
     
 }
 

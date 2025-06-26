@@ -17,6 +17,7 @@ void Text::SetText(std::string text, int red, int green, int blue, int alpha)
     this->green = green;
     this->blue = blue;
     this->alpha = alpha;
+    SetTexture();
 }
 
 void Text::SetColor(int red, int green, int blue, int alpha)
@@ -25,6 +26,7 @@ void Text::SetColor(int red, int green, int blue, int alpha)
     this->green = green;
     this->blue = blue;
     this->alpha = alpha;
+    SetTexture();
 }
 
 void Text::SetFont(const char* fontPath, int fontSize)
@@ -35,10 +37,17 @@ void Text::SetFont(const char* fontPath, int fontSize)
         std::cout << "Failed to load font: " << fontPath << TTF_GetError() << std::endl;
         return;
     }
+    SetTexture();
 }
 
 void Text::SetTexture()
 {
+    if(!font)
+    {
+        std::cout << "font is not loaded yet\n";
+        return;
+    }
+
     SDL_Surface* textSurface;
     SDL_Color color;
 
