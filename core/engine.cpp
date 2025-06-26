@@ -40,6 +40,12 @@ bool Engine::Init()
     windowLayout.w = width;
     windowLayout.h = height;
 
+    //initialize text
+    if(TTF_Init() < 0)
+    {
+        std::cout << "Error Initializing TTF" << SDL_GetError() << std::endl;
+    }
+
     return true;
 }
 
