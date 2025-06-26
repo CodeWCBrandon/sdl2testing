@@ -1,5 +1,6 @@
 #include "engine.h"
 #include "components/object.h"
+#include "components/entity.h"
 
 // ========= RENDERING ==========
 SDL_Window* Engine::window = nullptr;
@@ -8,7 +9,7 @@ SDL_Rect Engine::windowLayout;
 
 // ========= INPUTS ===========
 std::set<SDL_Keycode> Engine::inputBuffer;
-std::vector<Object*> Engine::renderBuffer;
+std::vector<Entity*> Engine::renderBuffer;
 
 bool Engine::Init()
 {
@@ -48,12 +49,12 @@ void Engine::RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, i
     SDL_RenderFillRect(renderer, &rect); // render
 }
 
-void Engine::AddToRenderBuffer(Object* obj)
+void Engine::AddToRenderBuffer(Entity* obj)
 {
     Engine::renderBuffer.push_back(obj);
 
     //sort based on the layermask
-    std::sort(Engine::renderBuffer.begin(), Engine::renderBuffer.end(), [](const Object* a, const Object* b){
+    std::sort(Engine::renderBuffer.begin(), Engine::renderBuffer.end(), [](const Entity* a, const Entity* b){
         return a->layerMask < b->layerMask;
     });
 }

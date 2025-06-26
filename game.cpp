@@ -13,6 +13,7 @@ class Player
 
 Player player;
 
+
 //Game logic
 void Engine::Start()
 {
@@ -22,6 +23,9 @@ void Engine::Start()
     player.object = new Object("assets/playerShip.bmp", windowLayout.w / 2, windowLayout.h / 2, 20, 20, 1);
     player.speed = 3;
     player.object->AddToRenderBuffer();
+
+    //other stuff
+
     
 }
 
