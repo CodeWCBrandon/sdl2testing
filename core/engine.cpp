@@ -8,7 +8,7 @@ SDL_Rect Engine::windowLayout;
 
 // ========= INPUTS ===========
 std::set<SDL_Keycode> Engine::inputBuffer;
-std::vector<Object> Engine::renderBuffer;
+std::vector<Object*> Engine::renderBuffer;
 
 bool Engine::Init()
 {
@@ -48,13 +48,13 @@ void Engine::RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, i
     SDL_RenderFillRect(renderer, &rect); // render
 }
 
-void Engine::AddToRenderBuffer(Object& obj)
+void Engine::AddToRenderBuffer(Object* obj)
 {
     Engine::renderBuffer.push_back(obj);
 
     //sort based on the layermask
-    std::sort(Engine::renderBuffer.begin(), Engine::renderBuffer.end(), [](const Object& a, const Object& b){
-        return a.layerMask < b.layerMask;
+    std::sort(Engine::renderBuffer.begin(), Engine::renderBuffer.end(), [](const Object* a, const Object* b){
+        return a->layerMask < b->layerMask;
     });
 }
 
@@ -83,7 +83,8 @@ void Engine::RenderTexture()
 {
     for(auto obj : Engine::renderBuffer)
     {
-        SDL_RenderCopy(Engine::renderer, obj.texture, NULL, &obj.rectFormat);
+        std::cout << obj->layerMask << "\n";
+        SDL_RenderCopy(Engine::renderer, obj->texture, NULL, &obj->rectFormat);
     }
 }
 

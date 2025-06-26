@@ -10,10 +10,10 @@ Object player;
 void Engine::Start()
 {
     //assigning global variables value
-    Object background("assets/spacebg.bmp", 0, 0, Engine::windowLayout.w, Engine::windowLayout.h, 0);
-    background.AddToRenderBuffer();
+    Object* background = new Object("assets/spacebg.bmp", 0, 0, windowLayout.w, windowLayout.h, 0);
+    background->AddToRenderBuffer();
     player.SetTexture("assets/playerShip.bmp"); player.Transform(windowLayout.w / 2, windowLayout.h / 2);
-    player.Scale(20, 20);
+    player.Scale(20, 20); player.SetLayerMask(1);
     player.AddToRenderBuffer();
     
 }

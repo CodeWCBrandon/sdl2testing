@@ -41,7 +41,12 @@ void Object::SetTexture(const char* texturePath)
     this->texture = Engine::LoadTexture(texturePath);
 }
 
+void Object::SetLayerMask(int layerMask)
+{
+    this->layerMask = layerMask;
+}
+
 void Object::AddToRenderBuffer()
 {
-    Engine::AddToRenderBuffer(*this);
+    Engine::AddToRenderBuffer(this);
 }

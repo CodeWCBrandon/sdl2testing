@@ -17,7 +17,7 @@ class Engine
         static SDL_Window* window;
         static SDL_Renderer* renderer;
         static std::set<SDL_Keycode> inputBuffer;
-        static std::vector<Object> renderBuffer;
+        static std::vector<Object*> renderBuffer;
 
         //normal state
         static bool Init();
@@ -32,6 +32,6 @@ class Engine
         //handle rendering
         static void RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a);
         static void RenderTexture();
-        static void AddToRenderBuffer(Object& obj);
+        static void AddToRenderBuffer(Object* obj);
         static SDL_Texture* LoadTexture(const char* texturePath);
 };
