@@ -1,7 +1,7 @@
 #include "core/engine.h"
 
 // main runner
-int main() 
+int main(int argc, char* argv[]) 
 {
     if(!Engine::Init())
     {
