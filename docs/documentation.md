@@ -158,3 +158,59 @@ texture = Engine::LoadTexture(surface);
 ```
 
 initialized in **engine.cpp** and used in **components** for converting to textures
+
+# Main
+
+This file is for running the code structure, this is the simple layout of **main.cpp**:
+
+```cpp
+#include "core/engine.h"
+
+// main runner
+int main() 
+{
+    //initializing
+    if(!Engine::Init())
+    {
+        std::cout << "failed to intiliazing the SDL\n" << SDL_GetError() << std::endl;
+        return Engine::Exit(1);
+    }
+    
+    //calling the start function that are overriden in game.cpp
+    Engine::Start();
+
+    //keep updating when true
+    while (Engine::Update())
+    {
+        //anything that need to be updated each frame 
+
+        //P.S Do not put game logic here.
+    }
+    
+    //Exiting
+    return Engine::Exit(0);
+}
+```
+
+# Game
+
+This file contains the logic for our game, this is the simple layout of **game.cpp**:
+
+```cpp
+#include "core/engine.h"
+#include "core/components/object.h"
+#include "core/components/vector2d.h"
+#include "core/components/text.h"
+
+
+void Engine::Start()
+{
+    //put the game logic that you want to run once on start here 
+}
+
+//Updating every frames
+bool Engine::Update()
+{
+    //put the game logic that needed each frame here
+}
+```
