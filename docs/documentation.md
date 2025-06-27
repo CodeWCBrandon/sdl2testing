@@ -214,3 +214,237 @@ bool Engine::Update()
     //put the game logic that needed each frame here
 }
 ```
+
+# Components
+
+## Entity 
+
+this is an abstract class that works as a parent for classes like: **Object, Text, etc** (more to be added).
+
+### Variables
+*the variables here is pretty self explanatory (please understand smh my head)*
+
+```cpp
+SDL_Texture* texture; // texture of its entity
+SDL_Rect rectFormat; // rect format or (position, size) format for SDL
+Vector2d position; // position in 2d plane
+double width; // width
+double height; // height
+int layerMask; // layer or z-index for order of rendering (the less the number the first one to be rendered, ex. background == 0, player == 1. the player will overlap the background because the background is rendered first).
+```
+
+### Functions
+
+#### Constuctor
+```cpp
+Entity(double x, double y, double width, double height, int layerMask);
+```
+
+this is used for assigning the value of it's entity on creating the object.
+
+---
+#### Transform(double xPos, double yPos)
+```cpp
+virtual void Transform(double xPos, double yPos);
+```
+
+this function is used for assigning the position of a class that inherits **Entity**. Example scenario:
+
+```cpp
+Object* player;
+
+//this changes the player's x position and y position
+player->Transform(10, 10);
+```
+
+---
+#### Scale(double width, double height)
+```cpp
+virtual void Scale(double width, double height);
+```
+
+this function is used for assigning the size of a class that inherits **Entity**. Example Scenario:
+
+```cpp
+Object* player;
+
+//this changes the player's width and height
+player->Scale(10, 10);
+```
+
+---
+#### SetLayerMask(int layerMask)
+```cpp
+virtual void SetLayerMask(int layerMask);
+```
+
+this function is used for assigning the layerMask of a class that inherits **Entity**. Exmaple Scenario:
+
+```cpp
+Object* player;
+
+//this changes the player's layermask
+player->SetLayerMask(1);
+```
+
+---
+#### UpdateRectFormat()
+```cpp
+virtual void UpdateRectFormat();
+```
+
+this function is used for updating the rect format, usually this function **called after changing the some variables value of the Entity (ex. position, width, height)**
+
+---
+#### AddToRenderBuffer()
+```cpp
+virtual void AddToRenderBuffer();
+```
+
+this function is used for adding it's object to **render buffer**. example scenario:
+
+```cpp
+Object* player
+
+//this adds the player to Engine::renderBuffer
+player->AddToRenderBuffer();
+```
+
+## Object
+
+this class inherits with **Entity**
+
+### Variables
+
+this class have no variables for now
+
+### Functions
+
+#### Constructor
+
+- Default constructor: for creating an object without a value
+- constructor: for creating an object with a value
+
+```cpp
+Object(const char* texturePath, double xPos, double yPos, double width, double height, int layerMask);
+```
+
+For the constructor we pass every value needed for **Entity** and texturePath for loading a **BMP files (images)**.
+
+---
+#### SetTexture()
+
+```cpp
+void SetTexture(const char* texturePath);
+```
+
+this function is used for assigning **BMP Files(images)** for the object texture. example scenario:
+
+```cpp
+Object* player;
+
+player->SetTexture("assets/player.bmp");
+```
+
+## Text
+This class inherits **Entity**
+
+use example:
+```cpp
+//calling the constructor to assigning the value
+Text* score = new Text("Score: " + std::to_string(currentScore), 25, 25, 100, 12, 1);
+
+//setting up the font
+score->SetFont("assets/fonts/ARCADE_N.TTF", 20);
+
+//setting up the colot
+score->SetColor(255, 255, 255, 255);
+
+//changing the text
+score->SetText("Hello world\n");
+```
+
+### Variables
+This is the variables for **Text**
+```cpp
+TTF_Font* font; // font style and size
+std::string text; // text to be rendered
+
+//color
+int red;
+int green;
+int blue;
+int alpha;
+```
+
+### Functions
+
+#### Constructor
+
+to assign the value upon creating an object
+
+```cpp
+Text(); // default constructor
+Text(std::string text, double xPos, double yPos, double width, double height, int layerMask); // constructor
+```
+
+#### SetFont()
+
+```cpp
+void SetFont(const char* fontPath, int fontSize);
+```
+
+To set the font, we need to pass the path (ex. "fonts/arial.ttf")
+
+#### SetText()
+
+```cpp
+void SetText(std::string text);
+```
+
+this function used for changing the text
+
+#### SetColor()
+
+```cpp
+void SetColor(int red, int green, int blue, int alpha);
+```
+
+this function used for changing the color of it's text
+
+#### SetTexture()
+
+```cpp
+void SetTexture();
+```
+
+this function used for updating the values that are changed. usually you don't need to **set texture** manually. because it's **automatically on SetFont(), SetText(), SetColor(), etc**.
+
+## Vector
+this class is used for storing the position of an **Entity** in 2D plane
+
+### Variables
+2D plane position:
+
+```cpp
+double x; //x position
+double y; //y position
+```
+
+### Functions
+
+#### Constructor
+
+```cpp
+Vector2d(double x, double y);
+```
+
+this constructor is used for assigning the object on initialization
+
+#### Vector2d::Normalize()
+
+```cpp
+static void Normalize(double& x, double& y);
+```
+
+this function is used for normalizing a movement of an **Entity** 

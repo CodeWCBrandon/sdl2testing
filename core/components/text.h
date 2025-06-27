@@ -19,6 +19,5 @@ class Text : public Entity
         void SetFont(const char* fontPath, int fontSize);
         void SetText(std::string text);
         void SetColor(int red, int green, int blue, int alpha);
-        void InitText();
         void SetTexture();
 };
