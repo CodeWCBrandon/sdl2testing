@@ -10,8 +10,12 @@ int main(int argc, char* argv[])
         return Engine::Exit(1);
     }
     
-    Engine::Start();
-
+    if (!Engine::MainMenu()) 
+    {
+        return Engine::Exit(0);  
+    }
+    Engine::Start();              
+    
     const double targetFPS = 144;
     const double targetFrameTime = (targetFPS > 0) ? (1000.0 / targetFPS) : 0;
 

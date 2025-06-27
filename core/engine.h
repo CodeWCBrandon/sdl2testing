@@ -28,6 +28,7 @@ class Engine
         static void Start();
         static bool Update();
         static int Exit(int exitCode);
+        static bool MainMenu();
 
         //input handling
         static void Input();
