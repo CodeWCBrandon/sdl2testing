@@ -388,6 +388,7 @@ Text(); // default constructor
 Text(std::string text, double xPos, double yPos, double width, double height, int layerMask); // constructor
 ```
 
+---
 #### SetFont()
 
 ```cpp
@@ -396,6 +397,7 @@ void SetFont(const char* fontPath, int fontSize);
 
 To set the font, we need to pass the path (ex. "fonts/arial.ttf")
 
+---
 #### SetText()
 
 ```cpp
@@ -404,6 +406,7 @@ void SetText(std::string text);
 
 this function used for changing the text
 
+---
 #### SetColor()
 
 ```cpp
@@ -412,6 +415,7 @@ void SetColor(int red, int green, int blue, int alpha);
 
 this function used for changing the color of it's text
 
+---
 #### SetTexture()
 
 ```cpp
@@ -441,6 +445,7 @@ Vector2d(double x, double y);
 
 this constructor is used for assigning the object on initialization
 
+---
 #### Vector2d::Normalize()
 
 ```cpp
