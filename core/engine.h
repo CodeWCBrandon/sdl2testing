@@ -31,14 +31,10 @@ class Engine
 
         //input handling
         static void Input();
-        static void IsKeyDown(SDL_Keycode key);
 
         //handle rendering
         static void RenderRect(SDL_Renderer*& renderer, SDL_Rect& rect, int r, int g, int b, int a);
         static void RenderTexture();
         static void AddToRenderBuffer(Entity* obj);
         static SDL_Texture* LoadTexture(SDL_Surface*& surface);
-
-        //debugging
-        static void Debug();
 };

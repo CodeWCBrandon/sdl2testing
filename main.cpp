@@ -12,7 +12,7 @@ int main()
     
     Engine::Start();
 
-    const double targetFPS = 0;
+    const double targetFPS = 144;
     const double targetFrameTime = (targetFPS > 0) ? (1000.0 / targetFPS) : 0;
 
     Uint64 lastFpsTime = SDL_GetPerformanceCounter();

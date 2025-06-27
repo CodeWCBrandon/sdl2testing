@@ -44,7 +44,6 @@ void Text::SetTexture()
         return;
     }
 
-    SDL_Surface* textSurface;
     SDL_Color color;
 
     color.r = red;
@@ -52,6 +51,6 @@ void Text::SetTexture()
     color.b = blue;
     color.a = alpha;
 
-    textSurface = TTF_RenderText_Solid(font, text.c_str(), color);
+    SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), color);
     texture = Engine::LoadTexture(textSurface);
 }

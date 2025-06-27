@@ -125,13 +125,3 @@ int Engine::Exit(int exitCode)
     SDL_Quit();
     return exitCode;
 }
-
-void Engine::Debug()
-{
-    //fps debug
-    Uint64 start = SDL_GetPerformanceCounter();
-    Uint64 end = SDL_GetPerformanceCounter();
-
-    double timeElapsed = (end - start) / (double)SDL_GetPerformanceFrequency();
-    std::cout << "Current FPS: " << std::to_string(1.0f/ timeElapsed) << std::endl;
-}
