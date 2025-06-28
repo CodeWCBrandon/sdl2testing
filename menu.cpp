@@ -32,6 +32,8 @@ bool Menu::MainMenu()
     {
         Engine::Input(); // takes input
         menu.HandleInput(menu); // check the input
+
+        SDL_Delay(50);
     }
 
     return (menu.GetSelectedIndex() == 0);
