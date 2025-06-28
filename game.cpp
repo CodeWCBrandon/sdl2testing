@@ -2,6 +2,7 @@
 #include "core/components/object.h"
 #include "core/components/vector2d.h"
 #include "core/components/text.h"
+#include "menu.h"
 
 void PlayerMovement();
 
@@ -34,7 +35,6 @@ void Engine::Start()
     score->SetFont("assets/fonts/ARCADE_N.TTF", 20);
     score->SetColor(255, 255, 255, 255);
     score->AddToRenderBuffer();
-    
 }
 
 //Updating every frames

@@ -1,5 +1,5 @@
 #include "core/engine.h"
-
+#include "menu.h"
 
 // main runner
 int main(int argc, char* argv[]) 
@@ -10,10 +10,11 @@ int main(int argc, char* argv[])
         return Engine::Exit(1);
     }
     
-    if (!Engine::MainMenu()) 
+    if (!Menu::MainMenu()) 
     {
         return Engine::Exit(0);  
     }
+
     Engine::Start();              
     
     const double targetFPS = 144;

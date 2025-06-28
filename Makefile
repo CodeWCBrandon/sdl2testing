@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra `sdl2-config --cflags`
 LDFLAGS = `sdl2-config --libs` -lSDL2_ttf
 
-SRC = $(wildcard core/*.cpp) $(wildcard core/components/*.cpp) main.cpp game.cpp
+SRC = $(wildcard core/*.cpp) $(wildcard core/components/*.cpp) $(wildcard ./*.cpp)
 OBJ = $(SRC:.cpp=.o)
 TARGET = game
 

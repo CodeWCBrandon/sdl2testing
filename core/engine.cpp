@@ -3,7 +3,6 @@
 #include "components/entity.h"
 #include "components/vector2d.h"
 #include "components/text.h"
-#include "components/menu.h"
 
 // ========= RENDERING ==========
 SDL_Window* Engine::window = nullptr;
@@ -116,45 +115,6 @@ void Engine::Input()
                 break;
         }
     }
-}
-
-bool Engine::MainMenu()
-{
-    std::vector<std::string> items = { "Start Game", "Exit" };
-    Menu menu(items, 100, 200, 40, 24);
-
-    while (!menu.IsDone()) 
-    {
-        SDL_Event input;
-        while (SDL_PollEvent(&input)) 
-        {
-            // WINDOW CLOSE → exit menu (quit app)
-            if (input.type == SDL_QUIT) 
-            {
-                return false;
-            }
-            // ESCAPE KEY → exit menu (quit app)
-            else if (input.type == SDL_KEYDOWN && input.key.repeat == 0 && input.key.keysym.sym == SDLK_ESCAPE) 
-            {
-                return false;
-            }
-            // NAVIGATION KEYS → move up/down or select
-            else if (input.type == SDL_KEYDOWN  && input.key.repeat == 0) 
-            {
-                menu.HandleInput(input.key.keysym.sym);
-            }
-        }
-
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
-
-        menu.Render();
-
-        SDL_RenderPresent(renderer);
-        SDL_Delay(16);
-    }
-
-    return (menu.GetSelectedIndex() == 0);
 }
 
 int Engine::Exit(int exitCode)
