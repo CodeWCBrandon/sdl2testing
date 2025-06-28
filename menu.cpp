@@ -23,7 +23,8 @@ Menu::~Menu()
 
 bool Menu::MainMenu()
 {
-    std::vector<std::string> items = { "Start Game", "Exit" };
+    std::vector<std::string> items = { "Start Game", 
+                                       "Exit      "};
     Menu menu(items, 100, 200, 40, 24);
 
     menu.Render();
