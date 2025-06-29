@@ -95,6 +95,7 @@ void Engine::RenderTexture()
 {
     for(auto obj : Engine::renderBuffer)
     {
+        // std::cout << obj->layerMask << "\n";
         SDL_RenderCopyEx(Engine::renderer, obj->texture, NULL, &obj->rectFormat, obj->transform.rotationAngle, NULL, SDL_FLIP_NONE);
     }
 }

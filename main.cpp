@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
         // =================
 
         // === get mouse position ===
-        SDL_GetGlobalMouseState(&Engine::mousePos.x, &Engine::mousePos.y);
+        SDL_GetMouseState(&Engine::mousePos.x, &Engine::mousePos.y);
         // ==========================
         
 

@@ -5,6 +5,7 @@
 #include "menu.h"
 
 void PlayerMovement();
+void HandlePlayerRotation();
 
 class Player
 {
@@ -31,7 +32,7 @@ void Engine::Start()
     player.object->AddToRenderBuffer();
 
     //other stuff
-    score = new Text("Score: " + std::to_string(currentScore), 25, 25, 100, 12, 1);
+    score = new Text("Score: " + std::to_string(currentScore), 25, 25, 100, 12, 2);
     score->SetFont("assets/fonts/ARCADE_N.TTF", 20);
     score->SetColor(255, 255, 255, 255);
     score->AddToRenderBuffer();
@@ -46,6 +47,17 @@ void Engine::Update()
         currentScore++;
         score->SetText("Score: " + std::to_string(currentScore));
     }
+
+    HandlePlayerRotation();
+}
+
+void HandlePlayerRotation()
+{
+    double dx = Engine::mousePos.x - player.object->transform.x;
+    double dy = Engine::mousePos.y - player.object->transform.y;
+
+    double angle = -std::atan2(dx, dy) * (180.0 / M_PI);
+    player.object->transform.rotationAngle = angle;
 }
 
 void PlayerMovement()
