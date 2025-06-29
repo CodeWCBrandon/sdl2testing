@@ -71,7 +71,7 @@ void Menu::Render()
 
     Engine::renderBuffer.clear();
 
-    for (int i = 0; i < options.size(); ++i) 
+    for (int i = 0; i < int(options.size()); ++i) 
     {
         if (i == selectedIndex) 
         {

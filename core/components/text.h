@@ -15,6 +15,7 @@ class Text : public Entity
 
         Text();
         Text(std::string text, double xPos, double yPos, double width, double height, int layerMask);
+        virtual ~Text() = default;
 
         void SetFont(const char* fontPath, int fontSize);
         void SetText(std::string text);
