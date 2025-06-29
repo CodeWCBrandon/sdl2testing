@@ -7,7 +7,7 @@ class Entity
     public:
         SDL_Texture* texture;
         SDL_Rect rectFormat;
-        Vector2d position;
+        Vector2d transform;
         double width;
         double height;
         int layerMask;

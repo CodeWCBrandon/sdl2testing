@@ -95,7 +95,7 @@ void Engine::RenderTexture()
 {
     for(auto obj : Engine::renderBuffer)
     {
-        SDL_RenderCopy(Engine::renderer, obj->texture, NULL, &obj->rectFormat);
+        SDL_RenderCopyEx(Engine::renderer, obj->texture, NULL, &obj->rectFormat, obj->transform.rotationAngle, NULL, SDL_FLIP_NONE);
     }
 }
 

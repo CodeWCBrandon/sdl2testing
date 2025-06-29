@@ -59,6 +59,6 @@ void PlayerMovement()
     if(Engine::inputBuffer.count(SDLK_d)) xDir = 1;
 
     Vector2d::Normalize(xDir, yDir);
-    player.object->Transform(player.object->position.x + (xDir * player.speed * Engine::deltaTime), 
-                             player.object->position.y + (yDir * player.speed * Engine::deltaTime));
+    player.object->Transform(player.object->transform.x + (xDir * player.speed * Engine::deltaTime), 
+                             player.object->transform.y + (yDir * player.speed * Engine::deltaTime));
 }

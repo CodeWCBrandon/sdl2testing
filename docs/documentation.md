@@ -447,6 +447,7 @@ this class is used for storing the position of an **Entity** in 2D plane
 ```cpp
 double x; //x position
 double y; //y position
+double rotationAngle; // rotation angle (clock-wise)
 ```
 
 ### Functions
@@ -454,7 +455,9 @@ double y; //y position
 #### Constructor
 
 ```cpp
+Vector2d();
 Vector2d(double x, double y);
+Vector2d(double x, double y, double rotationAngle);
 ```
 
 this constructor is used for assigning the object on initialization
@@ -466,4 +469,22 @@ this constructor is used for assigning the object on initialization
 static void Normalize(double& x, double& y);
 ```
 
-this function is used for normalizing a movement of an **Entity** 
+this function is used for normalizing a vector of an **Entity** 
+
+---
+#### Vector2d::SetPosition()
+
+```cpp
+void SetPosition(double x, double y);
+```
+
+this function is used for set the position of an **Entity**
+
+---
+#### Vector2d::SetRotation()
+
+```cpp
+void SetRotation(double angle);
+```
+
+this function is used for set the rotation of an **Entity** (clock-wise)
