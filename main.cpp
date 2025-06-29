@@ -23,19 +23,23 @@ int main(int argc, char* argv[])
     Uint64 lastFpsTime = SDL_GetPerformanceCounter();
     Uint64 frameCount = 0;
 
-    while (Engine::Update())
+    while(true)
     {
         Uint64 frameStart = SDL_GetPerformanceCounter();
 
         // === loop ===
+        Engine::Update();
         Engine::RenderTexture();
         Engine::Input();
         SDL_RenderPresent(Engine::renderer);
         SDL_RenderClear(Engine::renderer);
-        // ==================
+        // ============
 
         Uint64 frameEnd = SDL_GetPerformanceCounter();
         double frameTimeMs = (frameEnd - frameStart) * 1000.0 / SDL_GetPerformanceFrequency();
+
+        //exit from the game
+        if(Engine::inputBuffer.count(SDLK_ESCAPE)) break;
 
         // FPS cap
         if (frameTimeMs < targetFrameTime) SDL_Delay(Uint64(targetFrameTime - frameTimeMs));
@@ -48,11 +52,18 @@ int main(int argc, char* argv[])
 
         if (elapsedSec >= 1.0)
         {
+            system("clear");
+            // debug per second
+            
+            //FPS
             double fps = frameCount / elapsedSec;
             std::cout << "FPS: " << std::fixed << std::setprecision(2) << fps << "\n";
             
             frameCount = 0;
             lastFpsTime = now;
+
+            //Draw Calls
+            std::cout << "Draw Calls: " << Engine::renderBuffer.size() << "\n";
         }
     }
     

@@ -7,15 +7,12 @@ class Text : public Entity
 {
     public:
         TTF_Font* font;
+        SDL_Color color;
         std::string text;
-        int red;
-        int green;
-        int blue;
-        int alpha;
 
         Text();
         Text(std::string text, double xPos, double yPos, double width, double height, int layerMask);
-        virtual ~Text() = default;
+        virtual ~Text();
 
         void SetFont(const char* fontPath, int fontSize);
         void SetText(std::string text);

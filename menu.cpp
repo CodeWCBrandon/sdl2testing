@@ -15,10 +15,11 @@ Menu::Menu(const std::vector<std::string>& items, int x, int yStart, int spacing
 
 Menu::~Menu() 
 {
-    for (Text* t : options) 
+    for(int i = 0; i < int(options.size()); ++i) 
     {
-        delete t;
+        delete options[i];
     }
+    options.clear();
 }
 
 bool Menu::MainMenu()

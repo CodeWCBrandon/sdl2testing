@@ -76,13 +76,13 @@ SDL_Texture* Engine::LoadTexture(SDL_Surface*& surface)
     }
 
     SDL_Texture* texture = SDL_CreateTextureFromSurface(Engine::renderer, surface);
+    SDL_FreeSurface(surface);
 
     if(!texture)
     {
         std::cout << "Texture failed to load \n" << SDL_GetError();
         return nullptr;
     }
-    SDL_FreeSurface(surface);
 
     return texture;
 }

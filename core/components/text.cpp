@@ -4,10 +4,15 @@
 Text::Text() : Entity(0, 0, 0, 0, 0){}
 
 Text::Text(std::string text, double xPos, double yPos, double width, double height, int layerMask) :
-Entity(xPos, yPos, width, height, layerMask), red(0), green(0), blue(0)
+Entity(xPos, yPos, width, height, layerMask)
 {
     this->text = text;
     UpdateRectFormat();
+}
+
+Text::~Text()
+{
+    // text destroyed
 }
 
 void Text::SetText(std::string text)
@@ -18,10 +23,10 @@ void Text::SetText(std::string text)
 
 void Text::SetColor(int red, int green, int blue, int alpha)
 {
-    this->red = red;
-    this->green = green;
-    this->blue = blue;
-    this->alpha = alpha;
+    this->color.r = red;
+    this->color.g = green;
+    this->color.b = blue;
+    this->color.a = alpha;
     SetTexture();
 }
 
@@ -38,19 +43,14 @@ void Text::SetFont(const char* fontPath, int fontSize)
 
 void Text::SetTexture()
 {
+    if(texture) SDL_DestroyTexture(texture);
     if(!font)
     {
         std::cout << "font is not loaded yet\n";
         return;
     }
 
-    SDL_Color color;
-
-    color.r = red;
-    color.g = green;
-    color.b = blue;
-    color.a = alpha;
-
     SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), color);
     texture = Engine::LoadTexture(textSurface);
+    // SDL_FreeSurface(textSurface);
 }

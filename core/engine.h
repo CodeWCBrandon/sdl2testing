@@ -22,11 +22,12 @@ class Engine
         static SDL_Renderer* renderer;
         static std::set<SDL_Keycode> inputBuffer;
         static std::vector<Entity*> renderBuffer;
+        static double deltaTime;
 
         //normal state
         static bool Init();
         static void Start();
-        static bool Update();
+        static void Update();
         static int Exit(int exitCode);
 
         //input handling

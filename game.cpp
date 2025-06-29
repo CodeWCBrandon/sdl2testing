@@ -38,16 +38,14 @@ void Engine::Start()
 }
 
 //Updating every frames
-bool Engine::Update()
+void Engine::Update()
 {
     PlayerMovement();
-    score->SetText("Score: " + std::to_string(currentScore));
-
-    if(Engine::inputBuffer.count(SDLK_SPACE)) currentScore++;
-    
-    //processes
-    if(Engine::inputBuffer.count(SDLK_ESCAPE)) return false;
-    return true; // keep looping
+    if(Engine::inputBuffer.count(SDLK_SPACE))
+    {
+        currentScore++;
+        score->SetText("Score: " + std::to_string(currentScore));
+    }
 }
 
 void PlayerMovement()
