@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 
     Engine::Start();              
     
-    const double targetFPS = 60;
+    const double targetFPS = 0;
     const double targetFrameTime = (targetFPS > 0) ? (1000.0 / targetFPS) : 0;
     
     Uint64 lastFpsTime = SDL_GetPerformanceCounter();
@@ -31,8 +31,11 @@ int main(int argc, char* argv[])
         Uint64 currTime = SDL_GetPerformanceCounter();
         Engine::deltaTime = (currTime - prevTime) / (double)SDL_GetPerformanceFrequency();
         prevTime = currTime;
-        // std::cout << Engine::deltaTime << "\n";
         // =================
+
+        // === get mouse position ===
+        SDL_GetGlobalMouseState(&Engine::mousePos.x, &Engine::mousePos.y);
+        // ==========================
         
 
         Uint64 frameStart = SDL_GetPerformanceCounter();
@@ -76,6 +79,9 @@ int main(int argc, char* argv[])
             //Draw Calls
             std::cout << "Draw Calls: " << Engine::renderBuffer.size() << "\n";
 
+            //Developer logging
+            std::cout << "mousePos.x: " << Engine::mousePos.x << " " << "mousePos.y: " << Engine::mousePos.y << "\n";
+            std::cout << "deltaTime: " << Engine::deltaTime << "\n";
         }
     }
     

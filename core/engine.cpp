@@ -15,6 +15,7 @@ std::vector<Entity*> Engine::renderBuffer;
 
 // ========= VARIABLES ===========
 double Engine::deltaTime = 0;
+Mouse Engine::mousePos;
 
 bool Engine::Init()
 {

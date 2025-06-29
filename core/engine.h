@@ -15,6 +15,12 @@ class Object; // forward declaration
 class Entity;
 class Text;
 
+struct Mouse
+{
+    int x;
+    int y;
+};
+
 class Engine
 {
     public:
@@ -24,6 +30,7 @@ class Engine
         static std::set<SDL_Keycode> inputBuffer;
         static std::vector<Entity*> renderBuffer;
         static double deltaTime;
+        static Mouse mousePos;
 
         //normal state
         static bool Init();
