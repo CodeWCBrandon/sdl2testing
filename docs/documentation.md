@@ -3,10 +3,18 @@
 ## Variables
 
 ```cpp
+struct Mouse
+{
+    int x;
+    int y;
+};
+
 static double deltaTime;
+static Mouse mousePos;
 ```
 
 - Engine::deltaTime == to get the time difference between each frame
+- Engine::mousePos == to get the mouse position
 
 ### Engine::windowLayout
 ```cpp
