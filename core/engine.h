@@ -9,6 +9,7 @@
 #include <vector>
 #include <algorithm>
 #include <iomanip>
+#include <chrono>
 
 class Object; // forward declaration
 class Entity;

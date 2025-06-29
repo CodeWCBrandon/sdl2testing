@@ -13,6 +13,9 @@ SDL_Rect Engine::windowLayout;
 std::set<SDL_Keycode> Engine::inputBuffer;
 std::vector<Entity*> Engine::renderBuffer;
 
+// ========= VARIABLES ===========
+double Engine::deltaTime = 0;
+
 bool Engine::Init()
 {
     // ======= DISPLAY SIZE =========

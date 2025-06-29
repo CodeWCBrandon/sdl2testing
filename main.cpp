@@ -17,14 +17,24 @@ int main(int argc, char* argv[])
 
     Engine::Start();              
     
-    const double targetFPS = 144;
+    const double targetFPS = 60;
     const double targetFrameTime = (targetFPS > 0) ? (1000.0 / targetFPS) : 0;
-
+    
     Uint64 lastFpsTime = SDL_GetPerformanceCounter();
     Uint64 frameCount = 0;
 
+    Uint64 prevTime = SDL_GetPerformanceCounter(); // prev time for delta time
+    
     while(true)
     {
+        // === deltaTime ===
+        Uint64 currTime = SDL_GetPerformanceCounter();
+        Engine::deltaTime = (currTime - prevTime) / (double)SDL_GetPerformanceFrequency();
+        prevTime = currTime;
+        // std::cout << Engine::deltaTime << "\n";
+        // =================
+        
+
         Uint64 frameStart = SDL_GetPerformanceCounter();
 
         // === loop ===
@@ -34,9 +44,10 @@ int main(int argc, char* argv[])
         SDL_RenderPresent(Engine::renderer);
         SDL_RenderClear(Engine::renderer);
         // ============
-
+        
         Uint64 frameEnd = SDL_GetPerformanceCounter();
         double frameTimeMs = (frameEnd - frameStart) * 1000.0 / SDL_GetPerformanceFrequency();
+        
 
         //exit from the game
         if(Engine::inputBuffer.count(SDLK_ESCAPE)) break;
@@ -64,6 +75,7 @@ int main(int argc, char* argv[])
 
             //Draw Calls
             std::cout << "Draw Calls: " << Engine::renderBuffer.size() << "\n";
+
         }
     }
     

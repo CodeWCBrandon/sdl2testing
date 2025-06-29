@@ -27,7 +27,7 @@ void Engine::Start()
 
     //player
     player.object = new Object("assets/playerShip.bmp", windowLayout.w / 2, windowLayout.h / 2, 20, 20, 1);
-    player.speed = 3;
+    player.speed = 300;
     player.object->AddToRenderBuffer();
 
     //other stuff
@@ -59,5 +59,6 @@ void PlayerMovement()
     if(Engine::inputBuffer.count(SDLK_d)) xDir = 1;
 
     Vector2d::Normalize(xDir, yDir);
-    player.object->Transform(player.object->position.x + (xDir * player.speed), player.object->position.y + (yDir * player.speed));
+    player.object->Transform(player.object->position.x + (xDir * player.speed * Engine::deltaTime), 
+                             player.object->position.y + (yDir * player.speed * Engine::deltaTime));
 }
