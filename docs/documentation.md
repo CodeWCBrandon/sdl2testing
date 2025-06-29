@@ -2,6 +2,12 @@
 
 ## Variables
 
+```cpp
+static double deltaTime;
+```
+
+- Engine::deltaTime == to get the time difference between each frame
+
 ### Engine::windowLayout
 ```cpp
 static SDL_Rect windowLayout;
