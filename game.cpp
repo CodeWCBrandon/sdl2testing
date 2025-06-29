@@ -56,7 +56,7 @@ void HandlePlayerRotation()
     double dx = Engine::mousePos.x - player.object->transform.x;
     double dy = Engine::mousePos.y - player.object->transform.y;
 
-    double angle = -std::atan2(dx, dy) * (180.0 / M_PI);
+    double angle = std::atan2(dx, -dy) * (180.0 / M_PI);
     player.object->transform.rotationAngle = angle;
 }
 
