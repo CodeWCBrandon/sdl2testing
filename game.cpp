@@ -123,7 +123,7 @@ void PlayerMovement()
             yDir = 0;
         }
     }
-    std::cout << xCurrentSpeed << " " << xDir << std::endl;
+    // std::cout << xCurrentSpeed << " " << xDir << std::endl;
     player.object->Transform(player.object->transform.x + (xCurrentSpeed * Engine::deltaTime), 
                              player.object->transform.y + (yCurrentSpeed * Engine::deltaTime));
 }
