@@ -118,7 +118,6 @@ void PlayerMovement()
     if(abs(xCurrentSpeed) < 0.0001) xCurrentSpeed = 0;
     if(abs(yCurrentSpeed) < 0.0001) yCurrentSpeed = 0;
 
-    std::cout << xCurrentSpeed << " " << xDir << std::endl;
     player.object->Transform(player.object->transform.x + (xCurrentSpeed * Engine::deltaTime), 
                              player.object->transform.y + (yCurrentSpeed * Engine::deltaTime));
 }
