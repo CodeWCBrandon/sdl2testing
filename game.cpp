@@ -64,7 +64,6 @@ void PlayerMovement()
     double yDir = 0;
     double xDir = 0;
 
-    static double xLastDir = 0, yLastDir = 0;
     static double xCurrentSpeed = 0, yCurrentSpeed = 0;
     int accelRate = 400;
     int decelRate = 200;
@@ -75,34 +74,54 @@ void PlayerMovement()
     if(Engine::inputBuffer.count(SDLK_d)) xDir += 1.0f;
 
     Vector2d::Normalize(xDir, yDir);
-
+    
+    //flag for making player stationary
+    static int xFlag = 0;
+    static int yFlag = 0;
+    int flagLimit = 6; 
+    
     // Input in X axis
     if(xDir != 0 ){
-        xLastDir = xDir;
-
+        xFlag = 0;
+        
+        //move player and limit player below speed base
         if(abs(xCurrentSpeed) < player.speed) xCurrentSpeed += accelRate * xDir * Engine::deltaTime;
         if(abs(xCurrentSpeed) > player.speed) xCurrentSpeed = player.speed * xDir;
     }else{
-        if(abs(xCurrentSpeed) > 0) xCurrentSpeed -= decelRate * xLastDir * Engine::deltaTime;
-        std::cout << "reduce speed" << std::endl;
-        if((xCurrentSpeed > 0 && xLastDir < 0) || (xCurrentSpeed < 0 && xLastDir > 0)){
+        //reducing speed
+        double resetMultiplier = (xCurrentSpeed > 0) ? 1 : -1;
+        if(abs(xCurrentSpeed) > 0) xCurrentSpeed -= decelRate * resetMultiplier * Engine::deltaTime;
+        
+        //make player stationary
+        if(xFlag % 2 == 0 && xCurrentSpeed > 0) xFlag = std::min(flagLimit, xFlag + 1);
+        if(xFlag % 2 != 0 && xCurrentSpeed < 0) xFlag = std::min(flagLimit, xFlag + 1);
+
+        if(xFlag == flagLimit){
             xCurrentSpeed = 0;
             xDir = 0;
-        }else xDir = xLastDir;
+        }
     }
 
     // Input in Y axis
     if(yDir != 0 ){
-        yLastDir = yDir;
-
+        yFlag = 0;
+        
+        //move player and limit player below speed base
         if(abs(yCurrentSpeed) < player.speed) yCurrentSpeed += accelRate * yDir * Engine::deltaTime;
         if(abs(yCurrentSpeed) > player.speed) yCurrentSpeed = player.speed * yDir;
     }else{
-        if(abs(yCurrentSpeed) > 0) yCurrentSpeed -= decelRate * yLastDir * Engine::deltaTime;
-        if((yCurrentSpeed > 0 && yLastDir < 0) || (yCurrentSpeed < 0 && yLastDir > 0)){
+        //reducing player speed
+        double resetMultiplier = (yCurrentSpeed > 0) ? 1 : -1;
+        if(abs(yCurrentSpeed) > 0) yCurrentSpeed -= decelRate * resetMultiplier * Engine::deltaTime;
+        
+        //make player stationary
+        if(yFlag % 2 == 0 && yCurrentSpeed > 0) yFlag = std::min(flagLimit, yFlag + 1);
+        if(yFlag % 2 != 0 && yCurrentSpeed < 0) yFlag = std::min(flagLimit, yFlag + 1);
+
+        if(yFlag == flagLimit){
             yCurrentSpeed = 0;
             yDir = 0;
-        }else yDir = yLastDir;
+        }
     }
     std::cout << xCurrentSpeed << " " << xDir << std::endl;
     player.object->Transform(player.object->transform.x + (xCurrentSpeed * Engine::deltaTime), 
