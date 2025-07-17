@@ -56,7 +56,7 @@ void HandlePlayerRotation()
     double dx = Engine::mousePos.x - player.object->transform.x;
     double dy = Engine::mousePos.y - player.object->transform.y;
 
-    double angle = std::atan2(dx, -dy) * (180.0 / M_PI);
+    double angle = std::atan2(dx, -dy) * (180.0 / 3.14);
     player.object->transform.rotationAngle = angle;
 }
 
@@ -65,12 +65,47 @@ void PlayerMovement()
     double yDir = 0;
     double xDir = 0;
 
-    if(Engine::inputBuffer.count(SDLK_w)) yDir = -1;
-    if(Engine::inputBuffer.count(SDLK_a)) xDir = -1;
-    if(Engine::inputBuffer.count(SDLK_s)) yDir = 1;
-    if(Engine::inputBuffer.count(SDLK_d)) xDir = 1;
+    static double xLastDir = 0, yLastDir = 0;
+    static double xCurrentSpeed = 0, yCurrentSpeed = 0;
+    int accelRate = 400;
+    int decelRate = 200;
+
+    if(Engine::inputBuffer.count(SDLK_w)) yDir += -1.0f;
+    if(Engine::inputBuffer.count(SDLK_a)) xDir += -1.0f;
+    if(Engine::inputBuffer.count(SDLK_s)) yDir += 1.0f;
+    if(Engine::inputBuffer.count(SDLK_d)) xDir += 1.0f;
 
     Vector2d::Normalize(xDir, yDir);
-    player.object->Transform(player.object->transform.x + (xDir * player.speed * Engine::deltaTime), 
-                             player.object->transform.y + (yDir * player.speed * Engine::deltaTime));
+
+    // Input in X axis
+    if(xDir != 0 ){
+        xLastDir = xDir;
+
+        if(abs(xCurrentSpeed) < player.speed) xCurrentSpeed += accelRate * xDir * Engine::deltaTime;
+        if(abs(xCurrentSpeed) > player.speed) xCurrentSpeed = player.speed * xDir;
+    }else{
+        if(abs(xCurrentSpeed) > 0) xCurrentSpeed -= decelRate * xLastDir * Engine::deltaTime;
+        std::cout << "reduce speed" << std::endl;
+        if((xCurrentSpeed > 0 && xLastDir < 0) || (xCurrentSpeed < 0 && xLastDir > 0)){
+            xCurrentSpeed = 0;
+            xDir = 0;
+        }else xDir = xLastDir;
+    }
+
+    // Input in Y axis
+    if(yDir != 0 ){
+        yLastDir = yDir;
+
+        if(abs(yCurrentSpeed) < player.speed) yCurrentSpeed += accelRate * yDir * Engine::deltaTime;
+        if(abs(yCurrentSpeed) > player.speed) yCurrentSpeed = player.speed * yDir;
+    }else{
+        if(abs(yCurrentSpeed) > 0) yCurrentSpeed -= decelRate * yLastDir * Engine::deltaTime;
+        if((yCurrentSpeed > 0 && yLastDir < 0) || (yCurrentSpeed < 0 && yLastDir > 0)){
+            yCurrentSpeed = 0;
+            yDir = 0;
+        }else yDir = yLastDir;
+    }
+    std::cout << xCurrentSpeed << " " << xDir << std::endl;
+    player.object->Transform(player.object->transform.x + (xCurrentSpeed * Engine::deltaTime), 
+                             player.object->transform.y + (yCurrentSpeed * Engine::deltaTime));
 }
