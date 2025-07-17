@@ -69,8 +69,8 @@ void PlayerMovement()
     double xTargetSpeed, xSpeedDiff, xForce;
     double yTargetSpeed, ySpeedDiff, yForce;
 
-    double accelRate = 0.4f;
-    double decelRate = 0.5f;
+    double accelRate = 2.0f;
+    double decelRate = 2.0f;
 
     if(Engine::inputBuffer.count(SDLK_w)) yDir += -1.0f;
     if(Engine::inputBuffer.count(SDLK_a)) xDir += -1.0f;
@@ -85,14 +85,14 @@ void PlayerMovement()
         xTargetSpeed = player.speed * xDir;
         xSpeedDiff = xTargetSpeed - xCurrentSpeed;
 
-        xForce = xSpeedDiff * accelRate;
+        xForce = xSpeedDiff * accelRate * Engine::deltaTime;
         xCurrentSpeed += xForce;
     }else{
         // No input means the target speed is 0 (stationary)
         xTargetSpeed = 0;
         xSpeedDiff = xCurrentSpeed;
 
-        xForce = xSpeedDiff * decelRate;
+        xForce = xSpeedDiff * decelRate * Engine::deltaTime;
         xCurrentSpeed -= xForce;
     }
 
@@ -102,14 +102,14 @@ void PlayerMovement()
         yTargetSpeed = player.speed * yDir;
         ySpeedDiff = yTargetSpeed - yCurrentSpeed;
 
-        yForce = ySpeedDiff * accelRate;
+        yForce = ySpeedDiff * accelRate * Engine::deltaTime;
         yCurrentSpeed += yForce;
     }else{
         // No input means the target speed is 0 (stationary)
         yTargetSpeed = 0;
         ySpeedDiff = yCurrentSpeed;
 
-        yForce = ySpeedDiff * decelRate;
+        yForce = ySpeedDiff * decelRate * Engine::deltaTime;
         yCurrentSpeed -= yForce;
     }
 
